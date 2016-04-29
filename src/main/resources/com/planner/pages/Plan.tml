@@ -1,0 +1,8 @@
+<html t:type="layout" title="Plan"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<t:Form>
+    	<t:select t:id="colorMenu" value="hotelName" model="hotelNames"/>
+	</t:Form>
+</html>

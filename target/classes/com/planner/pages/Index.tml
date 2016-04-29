@@ -1,0 +1,11 @@
+<html t:type="layout" title="planner Index"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter"  >
+
+	<table t:type="grid" t:source="hotels" t:row="hotel" t:add="action">
+		<p:actionCell>
+			<a t:type="pagelink" t:page="plan" href="#">View</a>
+		</p:actionCell>
+	</table>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowy hotel</button>
+</html>
