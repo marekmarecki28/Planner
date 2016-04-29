@@ -2,27 +2,63 @@ package com.planner.pages;
 
 import java.util.List;
 
+import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.SelectModelFactory;
 
-import com.planner.dao.HotelDAO;
-import com.planner.entities.Hotel;
+import com.planner.dao.EmployeeDAO;
+import com.planner.encoders.EmployeeEncoder;
+import com.planner.entities.Employee;
 
 public class Plan {
 	
+	private Long employeeId;
+	
 	@Property
-	private String hotelName;
+	private Employee employee;
+	
+	@Property
+    private SelectModel personsModel;
 	
 	@Inject
-	private HotelDAO hotelDAO;
+    private SelectModelFactory selectModelFactory;
 	
-	 public List<Hotel> getHotels()
-	  {
-		  return hotelDAO.getHotels();
-	  }
-	 
-	  public List<String> getHotelNames()
-	  {
-		  return hotelDAO.getHotelNames();
-	  }
+	@Inject
+	private EmployeeDAO employeeDAO;
+	
+	public List<String> getEmployeeNames()
+	{
+		return employeeDAO.getEmployeeNames();
+	}
+	
+	public List<Employee> getEmployees()
+	{
+		return employeeDAO.getEmployees();
+	}
+	
+	public EmployeeEncoder getEmployeeEncoder()
+	{
+		return new EmployeeEncoder(employeeDAO);
+	}
+	
+	void onPrepareForRender() {
+		List<Employee> employees = getEmployees();
+		
+		if (employeeId != null) {
+            employee = findPersonInList(employeeId, employees);
+        }
+		
+        personsModel = selectModelFactory.create(employees, "firstName");
+    }
+	
+	private Employee findPersonInList(Long employeeId, List<Employee> employees) 
+	{
+        for (Employee employee : employees) {
+            if (employee.getEmployeeId().equals(employeeId)) {
+                return employee;
+            }
+        }
+        return null;
+    }
 }

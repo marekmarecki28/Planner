@@ -3,6 +3,8 @@
       xmlns:p="tapestry:parameter">
 
 	<t:Form>
-    	<t:select t:id="colorMenu" value="hotelName" model="hotelNames"/>
+    	<t:select t:id="employeeMenu" value="employee" model="personsModel" t:encoder="employeeEncoder"/>
+    	<input type="submit" value="Submit"/>
+    	You chose: ${employee}
 	</t:Form>
 </html>
