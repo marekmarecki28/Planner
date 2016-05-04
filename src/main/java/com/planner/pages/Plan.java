@@ -2,7 +2,9 @@ package com.planner.pages;
 
 import java.util.List;
 
+import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SelectModel;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
@@ -14,6 +16,9 @@ import com.planner.entities.Employee;
 public class Plan {
 	
 	private Long employeeId;
+	
+	@Persist
+	private boolean submitted;
 	
 	@Property
 	private Employee employee;
@@ -42,6 +47,16 @@ public class Plan {
 		return new EmployeeEncoder(employeeDAO);
 	}
 	
+	Long onPassivate() {
+        return employeeId;
+    }
+
+    void onActivate(EventContext context) {
+        if (context.getCount() > 0) {
+            employeeId = context.get(Long.class, 0);
+        }
+    }
+	
 	void onPrepareForRender() {
 		List<Employee> employees = getEmployees();
 		
@@ -49,7 +64,12 @@ public class Plan {
             employee = findPersonInList(employeeId, employees);
         }
 		
-        personsModel = selectModelFactory.create(employees, "firstName");
+        personsModel = selectModelFactory.create(employees, "fullName");
+    }
+	
+	void onValidateFromForm() {
+        employeeId = employee == null ? null : employee.getEmployeeId();
+		setSubmitted(true);
     }
 	
 	private Employee findPersonInList(Long employeeId, List<Employee> employees) 
@@ -61,4 +81,12 @@ public class Plan {
         }
         return null;
     }
+
+	public boolean isSubmitted() {
+		return submitted;
+	}
+
+	public void setSubmitted(boolean submitted) {
+		this.submitted = submitted;
+	}
 }

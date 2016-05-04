@@ -2,9 +2,14 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
+	<h2>Wybierz pracownika:</h2>
 	<t:Form>
     	<t:select t:id="employeeMenu" value="employee" model="personsModel" t:encoder="employeeEncoder"/>
-    	<input type="submit" value="Submit"/>
-    	You chose: ${employee}
+    	<br/>
+    	<input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"/>
 	</t:Form>
+	
+	<t:If t:test="submitted">
+	<h3>You chose: ${employee}</h3>
+	</t:If>
 </html>

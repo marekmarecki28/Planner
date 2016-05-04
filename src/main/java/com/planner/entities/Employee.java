@@ -34,6 +34,7 @@ public class Employee implements Serializable{
 		this.sex = sex;
 		this.email = email;
 		this.description = description;
+		this.fullName = firstName + " " +lastName;
 	}
 
 
@@ -50,6 +51,7 @@ public class Employee implements Serializable{
 	private String sex;
 	private String email;
 	private String description;
+	private String fullName;
 	
 	public Long getEmployeeId() {
 		return employeeId;
@@ -97,4 +99,24 @@ public class Employee implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getFullName() {
+		fullName = firstName + " " + lastName;
+		return fullName;
+	}
+
+	
+	@Override
+	public String toString() {
+        final String DIVIDER = ", ";
+        
+        StringBuilder buf = new StringBuilder();
+        buf.append(this.getClass().getSimpleName() + ": ");
+        buf.append("[");
+        buf.append("id=" + employeeId + DIVIDER);
+        buf.append("firstName=" + firstName + DIVIDER);
+        buf.append("lastName=" + lastName);
+        buf.append("]");
+        return buf.toString();
+    }
 }
