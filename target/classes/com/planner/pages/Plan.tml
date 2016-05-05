@@ -9,7 +9,9 @@
     	<input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"/>
 	</t:Form>
 	
+	<br/>
+	
 	<t:If t:test="submitted">
-	<h3>You chose: ${employee}</h3>
+		<t:BeanDisplay t:object="employee"/>
 	</t:If>
 </html>

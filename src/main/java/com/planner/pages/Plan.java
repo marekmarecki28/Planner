@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SelectModel;
-import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
@@ -16,9 +15,6 @@ import com.planner.entities.Employee;
 public class Plan {
 	
 	private Long employeeId;
-	
-	@Persist
-	private boolean submitted;
 	
 	@Property
 	private Employee employee;
@@ -69,7 +65,6 @@ public class Plan {
 	
 	void onValidateFromForm() {
         employeeId = employee == null ? null : employee.getEmployeeId();
-		setSubmitted(true);
     }
 	
 	private Employee findPersonInList(Long employeeId, List<Employee> employees) 
@@ -83,10 +78,9 @@ public class Plan {
     }
 
 	public boolean isSubmitted() {
-		return submitted;
-	}
-
-	public void setSubmitted(boolean submitted) {
-		this.submitted = submitted;
+		if(employee != null)
+			return true;
+		else
+			return false;
 	}
 }
