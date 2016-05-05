@@ -31,5 +31,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		System.out.println("Employee found= " + employee);
 		return employee;
 	}
+	@Override
+	public List<Employee> getPokojowa() {
+		List<Employee> employees = session.createQuery("from Employee where position_id = 0").list();
+		return employees;
+	}
+	@Override
+	public List<Employee> getLobby() {
+		List<Employee> employees = session.createQuery("from Employee where position_id = 1").list();
+		return employees;
+	}
+	@Override
+	public List<Employee> getSpa() {
+		List<Employee> employees = session.createQuery("from Employee where position_id = 2").list();
+		return employees;
+	}
 
 }

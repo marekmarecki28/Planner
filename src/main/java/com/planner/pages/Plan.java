@@ -8,8 +8,10 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
 
+import com.planner.dao.CalendarDAO;
 import com.planner.dao.EmployeeDAO;
 import com.planner.encoders.EmployeeEncoder;
+import com.planner.entities.Calendar;
 import com.planner.entities.Employee;
 
 public class Plan {
@@ -17,7 +19,25 @@ public class Plan {
 	private Long employeeId;
 	
 	@Property
+	private String pn;
+	@Property
+	private String wt;
+	@Property
+	private String sr;
+	@Property
+	private String czw;
+	@Property
+	private String pt;
+	@Property
+	private String sb;
+	@Property
+	private String nd;
+	
+	@Property
 	private Employee employee;
+	
+	@Property
+	private Calendar calendar;
 	
 	@Property
     private SelectModel personsModel;
@@ -27,6 +47,9 @@ public class Plan {
 	
 	@Inject
 	private EmployeeDAO employeeDAO;
+	
+	@Inject
+	private CalendarDAO calendarDAO;
 	
 	public List<String> getEmployeeNames()
 	{
@@ -44,6 +67,7 @@ public class Plan {
 	}
 	
 	Long onPassivate() {
+		System.out.println("Poniedzialek: " + pn);
         return employeeId;
     }
 
@@ -82,5 +106,10 @@ public class Plan {
 			return true;
 		else
 			return false;
+	}
+	
+	public List<Calendar> getCalendars()
+	{
+		return calendarDAO.getCalendars();
 	}
 }

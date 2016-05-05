@@ -16,8 +16,10 @@ import org.apache.tapestry5.services.javascript.StackExtension;
 import org.apache.tapestry5.services.javascript.StackExtensionType;
 import org.slf4j.Logger;
 
+import com.planner.dao.CalendarDAO;
 import com.planner.dao.EmployeeDAO;
 import com.planner.dao.HotelDAO;
+import com.planner.dao.impl.CalendarDAOImpl;
 import com.planner.dao.impl.EmployeeDAOImpl;
 import com.planner.dao.impl.HotelDAOImpl;
 
@@ -32,6 +34,7 @@ public class AppModule
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
     	binder.bind(HotelDAO.class, HotelDAOImpl.class);
     	binder.bind(EmployeeDAO.class, EmployeeDAOImpl.class);
+    	binder.bind(CalendarDAO.class, CalendarDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation

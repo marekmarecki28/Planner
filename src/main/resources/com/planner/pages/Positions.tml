@@ -1,0 +1,13 @@
+<html t:type="layout" title="Plan"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<h4>Pokojowa:</h4>
+	<table t:type="grid" t:source="pokojowa" t:row="employee" t:include="firstName,lastName,description"/>
+	
+	<h4>Lobby:</h4>
+	<table t:type="grid" t:source="lobby" t:row="employee" t:include="firstName,lastName,description"/>
+	
+	<h4>Spa:</h4>
+	<table t:type="grid" t:source="spa" t:row="employee" t:include="firstName,lastName,description"/>
+</html>

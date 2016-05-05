@@ -34,6 +34,9 @@ public class Index
   @InjectPage
   private Plan plan;
   
+  @InjectPage
+  private Positions	positions;
+  
   @Inject
   private Session session;
   

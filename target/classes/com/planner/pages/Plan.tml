@@ -2,6 +2,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
+
 	<h2>Wybierz pracownika:</h2>
 	<t:Form>
     	<t:select t:id="employeeMenu" value="employee" model="personsModel" t:encoder="employeeEncoder"/>
@@ -15,26 +16,7 @@
 		<t:BeanDisplay t:object="employee"/>
 	</t:If>
 	
-	<div class="table-responsive">
-	<table class="table">
-	  <tr>
-	    <th>PN</th>
-	    <th>WT</th> 
-	    <th>SR</th>
-	    <th>CZW</th> 
-	    <th>PT</th>
-	    <th>SB</th> 
-	    <th>ND</th>
-	  </tr>
-	  <tr>
-	    <td><textarea name="" id="" cols="10" rows="5">asd</textarea></td>
-	    <td><textarea name="" id="" cols="10" rows="5">assd</textarea></td> 
-	    <td><textarea name="" id="" cols="10" rows="5">da</textarea></td>
-	    <td><textarea name="" id="" cols="10" rows="5">asda</textarea></td> 
-	    <td><textarea name="" id="" cols="10" rows="5">sda</textarea></td>
-	    <td><textarea name="" id="" cols="10" rows="5">asd</textarea></td> 
-	    <td><textarea name="" id="" cols="10" rows="5">asd</textarea></td>
-	  </tr>
+	<table t:type="grid" t:source="calendars" t:row="calendar">
 	</table>
-	</div>
+
 </html>
