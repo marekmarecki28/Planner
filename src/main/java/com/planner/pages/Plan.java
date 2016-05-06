@@ -1,9 +1,13 @@
 package com.planner.pages;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SelectModel;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
@@ -19,25 +23,16 @@ public class Plan {
 	private Long employeeId;
 	
 	@Property
-	private String pn;
-	@Property
-	private String wt;
-	@Property
-	private String sr;
-	@Property
-	private String czw;
-	@Property
-	private String pt;
-	@Property
-	private String sb;
-	@Property
-	private String nd;
-	
-	@Property
 	private Employee employee;
 	
 	@Property
 	private Calendar calendar;
+	
+	@Persist
+	private Integer week;
+	
+	@Persist
+	private Integer year;
 	
 	@Property
     private SelectModel personsModel;
@@ -67,7 +62,6 @@ public class Plan {
 	}
 	
 	Long onPassivate() {
-		System.out.println("Poniedzialek: " + pn);
         return employeeId;
     }
 
@@ -75,6 +69,15 @@ public class Plan {
         if (context.getCount() > 0) {
             employeeId = context.get(Long.class, 0);
         }
+        
+        if(this.week == null)
+		{
+        	setWeek();
+		}
+        if(this.year == null)
+		{
+        	setYear();
+		}
     }
 	
 	void onPrepareForRender() {
@@ -100,6 +103,22 @@ public class Plan {
         }
         return null;
     }
+	
+	void onSelectedFromUp()
+	{
+		this.week = this.week - 1;
+	}
+	
+	void onSelectedFromDown()
+	{
+		this.week = this.week + 1;
+	}
+	
+	void onSelectedFromSubmit()
+	{
+		setWeek();
+		setYear();
+	}
 
 	public boolean isSubmitted() {
 		if(employee != null)
@@ -108,8 +127,33 @@ public class Plan {
 			return false;
 	}
 	
-	public List<Calendar> getCalendars()
+	public List<Calendar> getCalendarsWeek()
 	{
-		return calendarDAO.getCalendars();
+		return calendarDAO.getCalendarsWeek(this.week, this.year);
 	}
+	
+	public void setWeek()
+	{
+		System.out.println("SET WEEk");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String currentDate=  df.format(new Date());
+		Integer week = calendarDAO.getWeekOfDate(currentDate);
+		this.week = week;
+	}
+	
+	public void setYear()
+	{
+		System.out.println("SET YEAR");
+		this.year = 1900 + new Date().getYear();
+	}
+
+	public Integer getWeek() {
+		return this.week;
+	}
+
+	public Integer getYear() {
+		return this.year;
+	}
+	
+	
 }
