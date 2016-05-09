@@ -1,0 +1,18 @@
+<html t:type="layout" title="Plan"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+<h1>Update</h1>
+    
+    <div class="eg">
+        <t:if test="calendar">
+            <t:beaneditform t:id="calendarForm" object="calendar" submitLabel="Save"/>
+        </t:if>
+        <t:if negate="true" test="calendar">
+            Person ${calendarId} does not exist.<br/><br/>
+        </t:if>
+    
+        <a t:type="pageLink" t:page="plan" href="#">Cancel</a>
+    </div>
+
+</html>

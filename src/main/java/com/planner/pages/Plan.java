@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SelectModel;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
 
@@ -28,6 +30,9 @@ public class Plan {
 	@Property
 	private Calendar calendar;
 	
+	@Property
+	private Long calendarId;
+	
 	@Persist
 	private Integer week;
 	
@@ -45,6 +50,9 @@ public class Plan {
 	
 	@Inject
 	private CalendarDAO calendarDAO;
+	
+	@InjectComponent("calendarForm")
+    private Form form;
 	
 	public List<String> getEmployeeNames()
 	{
@@ -154,6 +162,5 @@ public class Plan {
 	public Integer getYear() {
 		return this.year;
 	}
-	
 	
 }

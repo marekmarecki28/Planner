@@ -2,13 +2,16 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter"  >
 
-	<table t:type="grid" t:source="hotels" t:row="hotel" t:add="positions,employees">
+	<table t:type="grid" t:source="hotels" t:row="hotel" t:add="positions,employees,schedule">
 		<p:positionsCell>
 			<a t:type="pagelink" t:page="positions" href="#">Stanowiska</a>
 		</p:positionsCell>
 		<p:employeesCell>
 			<a t:type="pagelink" t:page="plan" href="#">Pracownicy</a>
 		</p:employeesCell>
+		<p:scheduleCell>
+			<a t:type="pagelink" t:page="hotelSchedule" href="#">Grafik pracy</a>
+		</p:scheduleCell>
 	</table>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowy hotel</button>
 </html>

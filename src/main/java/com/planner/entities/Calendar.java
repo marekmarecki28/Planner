@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
+import org.apache.tapestry5.ioc.annotations.Inject;
 
 @Entity
 @Table( name = "CALENDAR" )
@@ -21,6 +22,7 @@ public class Calendar implements Serializable{
 	 */
 	private static final long serialVersionUID = -3864357124242646337L;
 	
+	@Inject
 	public Calendar(){}
 
 	public Calendar(Date workingDate, String description, Long userId) {
@@ -30,7 +32,6 @@ public class Calendar implements Serializable{
 	}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NonVisual
 	@Column(name = "CALENDAR_ID")
 	private Long calendarId;
@@ -57,5 +58,10 @@ public class Calendar implements Serializable{
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
+	public Long getCalendarId() {
+		return calendarId;
+	}
+	public void setCalendarId(Long calendarId) {
+		this.calendarId = calendarId;
+	}
 }

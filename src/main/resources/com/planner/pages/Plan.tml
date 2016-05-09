@@ -7,7 +7,7 @@
 	<t:Form>
     	<t:select t:id="employeeMenu" value="employee" model="personsModel" t:encoder="employeeEncoder"/>
     	<br/>
-    	<input class="btn btn-lg btn-primary btn-block" t:id="submit" t:type="Submit" value="Submit"/>
+    	<input class="btn btn-lg btn-primary btn-block" t:id="submit" t:type="Submit" value="Wybierz"/>
 	</t:Form>
 	
 	<br/>
@@ -16,15 +16,17 @@
 		<t:BeanDisplay t:object="employee"/>
 	
 	<br/>
-	<t:Form>
-	<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="^"/>
+	<t:Form t:id="calendarForm">
+	<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 	<br/>
-	<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId"/>
+	<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId" t:add="action">
+		<p:actionCell>
+            <a t:type="pageLink" t:page="calendarUpdate" t:context="calendar.calendarId" href="#">Update</a>
+        </p:actionCell>
+	</table>
 	<br/>
-	<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="v"/>
+	<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>
 	</t:Form>
-	${week}
-	${year}
 	</t:If>
 
 </html>

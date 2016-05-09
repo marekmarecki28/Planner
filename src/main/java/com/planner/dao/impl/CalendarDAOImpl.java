@@ -27,4 +27,15 @@ public class CalendarDAOImpl implements CalendarDAO {
 		Integer week = (Integer) session.createQuery("select week from Calendar where working_date = to_date('" + date +"','YYYY-MM-DD')").uniqueResult();
 		return week;
 	}
+
+	@Override
+	public Calendar findCalendar(Long calendarId) {
+		Calendar calendar = (Calendar) session.createQuery("from Calendar where calendar_id = " + calendarId).uniqueResult();
+		return calendar;
+	}
+
+	@Override
+	public void updateCalendar(Calendar calendar) {
+		session.update(calendar);
+	}
 }
