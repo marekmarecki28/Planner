@@ -3,7 +3,9 @@ package com.planner.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.planner.dao.CalendarDAO;
 import com.planner.entities.Calendar;
@@ -18,7 +20,7 @@ public class CalendarDAOImpl implements CalendarDAO {
 
 	@Override
 	public List<Calendar> getCalendarsWeek(Integer week, Integer year) {
-		List<Calendar> calendars = session.createQuery("from Calendar where week = " + week + " and working_date like '%" + year+ "%'").list();
+		List<Calendar> calendars = session.createQuery("from Calendar where week = " + week + " and working_date like '%" + year+ "%' order by calendar_id asc").list();
 		return calendars;
 	}
 
@@ -36,6 +38,16 @@ public class CalendarDAOImpl implements CalendarDAO {
 
 	@Override
 	public void updateCalendar(Calendar calendar) {
-		session.update(calendar);
+		System.out.println("*******UPDATE CALENDAR: " + calendar.getCalendarId());
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 session.update(calendar); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
 	}
 }

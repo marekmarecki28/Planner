@@ -2,6 +2,7 @@ package com.planner.pages;
 
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -15,6 +16,7 @@ public class CalendarUpdate {
 	private Long calendarId;
 	
 	@Property
+	@Persist
 	private Calendar calendar;
 	
 	@Inject
@@ -36,7 +38,6 @@ public class CalendarUpdate {
     
     void setupRender() {
         calendar = calendarDAO.findCalendar(calendarId);
-        calendar.setCalendarId(calendarId);
     }
     
 
@@ -48,6 +49,7 @@ public class CalendarUpdate {
         }
 
         try {
+            System.out.println("------> Calendar: " + calendar.getCalendarId());
             calendarDAO.updateCalendar(calendar);
         } catch (Exception e) {
             // Display the cause. In a real system we would try harder to get a
