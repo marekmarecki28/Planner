@@ -51,4 +51,10 @@ public class CalendarDAOImpl implements CalendarDAO {
 	         e.printStackTrace(); 
 	      }
 	}
+
+	@Override
+	public List<Calendar> getCalendarsWeek(Integer week, Integer year) {
+		List<Calendar> calendars = session.createQuery("from Calendar where week = " + week + " and working_date like '%" + year+ "%' order by calendar_id asc").list();
+		return calendars;
+	}
 }

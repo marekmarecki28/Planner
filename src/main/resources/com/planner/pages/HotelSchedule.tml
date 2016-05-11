@@ -5,7 +5,11 @@
 	<t:Form>
 		<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 		<br/>
-		<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId" t:add="action"/>
+		<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId" t:add="action">
+			<p:actionCell>
+               <t:grid t:source="calendarsWeek"/>
+            </p:actionCell>
+        </table>
 		<br/>
 		<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>
 	</t:Form>

@@ -10,5 +10,6 @@ public interface CalendarDAO {
 	public Integer getWeekOfDate(String date);
 	public Calendar findCalendar(Long calendarId);
 	public void updateCalendar(Calendar calendar);
+	public List<Calendar> getCalendarsWeek(Integer week, Integer year);
 
 }
