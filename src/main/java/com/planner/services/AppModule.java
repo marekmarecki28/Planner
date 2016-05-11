@@ -19,9 +19,11 @@ import org.slf4j.Logger;
 import com.planner.dao.CalendarDAO;
 import com.planner.dao.EmployeeDAO;
 import com.planner.dao.HotelDAO;
+import com.planner.dao.UserCalendarDAO;
 import com.planner.dao.impl.CalendarDAOImpl;
 import com.planner.dao.impl.EmployeeDAOImpl;
 import com.planner.dao.impl.HotelDAOImpl;
+import com.planner.dao.impl.UserCalendarDAOImpl;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
@@ -35,6 +37,7 @@ public class AppModule
     	binder.bind(HotelDAO.class, HotelDAOImpl.class);
     	binder.bind(EmployeeDAO.class, EmployeeDAOImpl.class);
     	binder.bind(CalendarDAO.class, CalendarDAOImpl.class);
+    	binder.bind(UserCalendarDAO.class, UserCalendarDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation

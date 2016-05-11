@@ -25,6 +25,7 @@ public class Plan {
 	private Long employeeId;
 	
 	@Property
+	@Persist
 	private Employee employee;
 	
 	@Property
@@ -137,7 +138,7 @@ public class Plan {
 	
 	public List<Calendar> getCalendarsWeek()
 	{
-		return calendarDAO.getCalendarsWeek(this.week, this.year);
+		return calendarDAO.getCalendarsWeek(this.week, this.year, employeeId);
 	}
 	
 	public void setWeek()

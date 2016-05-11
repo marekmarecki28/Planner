@@ -19,8 +19,10 @@ public class CalendarDAOImpl implements CalendarDAO {
 	}
 
 	@Override
-	public List<Calendar> getCalendarsWeek(Integer week, Integer year) {
-		List<Calendar> calendars = session.createQuery("from Calendar where week = " + week + " and working_date like '%" + year+ "%' order by calendar_id asc").list();
+	public List<Calendar> getCalendarsWeek(Integer week, Integer year, Long userId) {
+		String query = "select * from (select c.calendar_id, c.working_date, uc.work_start, uc.work_end, uc.description,c.week,uc.user_id from calendar c left outer join usercalendar uc on c.calendar_id = uc.calendar_id and uc.user_id = " + userId + " order by c.calendar_id asc) d where d.week = " + week + " and ( d.working_date like '%" + year + "%' )";
+		//List<Calendar> calendars = session.createQuery("from Calendar where week = " + week + " and working_date like '%" + year+ "%' order by calendar_id asc").list();
+		List<Calendar> calendars = session.createSQLQuery(query).addEntity(Calendar.class).list();
 		return calendars;
 	}
 
@@ -38,7 +40,6 @@ public class CalendarDAOImpl implements CalendarDAO {
 
 	@Override
 	public void updateCalendar(Calendar calendar) {
-		System.out.println("*******UPDATE CALENDAR: " + calendar.getCalendarId());
 		Transaction tx = null;
 		try{
 	         tx = session.getTransaction();

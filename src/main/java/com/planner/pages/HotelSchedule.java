@@ -47,7 +47,8 @@ public class HotelSchedule {
 	
 	public List<Calendar> getCalendarsWeek()
 	{
-		return calendarDAO.getCalendarsWeek(this.week, this.year);
+		//return calendarDAO.getCalendarsWeek(this.week, this.year);
+		return null;
 	}
 	
 	public void setWeek()
