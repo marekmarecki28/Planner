@@ -2,7 +2,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
-<h1>Update</h1>
+<h1>Wprowadzanie czasu pracy</h1>
     
     <div class="eg">
         <t:if test="userCalendar">
@@ -10,19 +10,30 @@
 <!--             <br/> -->
             <form t:type="form" t:id="calendarForm" class="well">
             	<t:label for="updDescription"/>
-				<input t:type="TextField" t:id="updDescription" value="userCalendar.description" t:validate="required, maxlength=100" size="10"/>
+				<input t:type="TextField" t:id="updDescription" value="userCalendar.description" t:validate="maxlength=100" size="10"/>
 				<br/>
 				<t:label for="updWorkStart"/>
-				<input t:type="TextField" t:id="updWorkStart" value="userCalendar.workStart" t:validate="required, maxlength=5" size="10"/>
+				<input t:type="TextField" t:id="updWorkStart" value="userCalendar.workStart" t:validate="maxlength=5" size="10"/>
 				<br/>
 				<t:label for="updWorkEnd"/>
-				<input t:type="TextField" t:id="updWorkEnd" value="userCalendar.workEnd" t:validate="required, maxlength=5" size="10"/>
+				<input t:type="TextField" t:id="updWorkEnd" value="userCalendar.workEnd" t:validate="maxlength=5" size="10"/>
 				<br/>
 				<input t:type="submit" t:value="Zapisz"/>
             </form>
         </t:if>
         <t:if negate="true" test="userCalendar">
-            Person ${calendarId} does not exist.<br/><br/>
+            <form t:type="form" t:id="createForm" class="well">
+            	<t:label for="crtDescription"/>
+				<input t:type="TextField" t:id="crtDescription" value="userCalendar.description" t:validate="maxlength=100" size="10"/>
+				<br/>
+				<t:label for="crtWorkStart"/>
+				<input t:type="TextField" t:id="crtWorkStart" value="userCalendar.workStart" t:validate="maxlength=5" size="10"/>
+				<br/>
+				<t:label for="crtWorkEnd"/>
+				<input t:type="TextField" t:id="crtWorkEnd" value="userCalendar.workEnd" t:validate="maxlength=5" size="10"/>
+				<br/>
+				<input t:type="submit" t:value="Zapisz"/>
+            </form>>
         </t:if>
         <a t:type="pageLink" t:page="plan" href="#">Cancel</a>
     </div>

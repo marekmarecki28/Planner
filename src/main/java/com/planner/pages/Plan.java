@@ -22,6 +22,7 @@ import com.planner.entities.Employee;
 
 public class Plan {
 	
+	@Property
 	private Long employeeId;
 	
 	@Property
@@ -78,6 +79,8 @@ public class Plan {
         if (context.getCount() > 0) {
             employeeId = context.get(Long.class, 0);
         }
+        
+        employeeId = employee == null ? null : employee.getEmployeeId();
         
         if(this.week == null)
 		{

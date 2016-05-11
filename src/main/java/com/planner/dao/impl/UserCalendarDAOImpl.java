@@ -17,8 +17,8 @@ public class UserCalendarDAOImpl implements UserCalendarDAO {
 	}
 	
 	@Override
-	public UserCalendar findUserCalendar(Long calendarId) {
-		UserCalendar calendar = (UserCalendar) session.createQuery("from UserCalendar where calendar_id = " + calendarId).uniqueResult();
+	public UserCalendar findUserCalendar(Long calendarId, Long employeeId) {
+		UserCalendar calendar = (UserCalendar) session.createQuery("from UserCalendar where calendar_id = " + calendarId + " and user_id = " + employeeId ).uniqueResult();
 		return calendar;
 	}
 
@@ -28,6 +28,20 @@ public class UserCalendarDAOImpl implements UserCalendarDAO {
 		try{
 	         tx = session.getTransaction();
 			 session.update(userCalendar); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
+	}
+
+	@Override
+	public void createUserCalendar(UserCalendar userCalendar) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 session.save(userCalendar); 
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

@@ -1,9 +1,9 @@
 <html t:type="layout" title="Plan"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
-
-
-	<h2>Wybierz pracownika:</h2>
+      
+      
+	<h3>Wybierz pracownika:</h3>
 	<t:Form>
     	<t:select t:id="employeeMenu" value="employee" model="personsModel" t:encoder="employeeEncoder"/>
     	<br/>
@@ -14,22 +14,18 @@
 	
 	<t:If t:test="submitted">
 		<t:BeanDisplay t:object="employee"/>
-	
-	<br/>
-	<t:Form t:id="calendarForm">
-	<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
-	<br/>
-	<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId" t:reorder="workingDate,workStart,workEnd,description" t:add="action">
-		<p:actionCell>
-            <a t:type="pageLink" t:page="calendarUpdate" t:context="calendar.calendarId" href="#">Update</a>
-        </p:actionCell>
-	</table>
-
-<!-- 	<table t:type="grid" t:source="calendarsWeek" t:row="calendar"> -->
-<!-- 	</table> -->
-	<br/>
-	<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>
-	</t:Form>
+		<br/>
+		<t:Form t:id="calendarForm">
+			<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
+				<br/>
+			<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId" t:reorder="workingDate,workStart,workEnd,description" t:add="action">
+				<p:actionCell>
+		            <a t:type="pageLink" t:page="calendarUpdate" t:context="[calendar.calendarId,employeeId]" href="#">Update</a>
+		        </p:actionCell>
+			</table>
+				<br/>
+			<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>
+		</t:Form>
 	</t:If>
 
 </html>

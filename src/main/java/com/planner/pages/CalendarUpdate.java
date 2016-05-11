@@ -3,27 +3,29 @@ package com.planner.pages;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-import com.planner.dao.CalendarDAO;
 import com.planner.dao.UserCalendarDAO;
 import com.planner.entities.Calendar;
 import com.planner.entities.UserCalendar;
 
 public class CalendarUpdate {
 	
+	@Property
 	@Persist
 	private Long employeeId;
 	
 	@Property
+	@Persist
 	private Long calendarId;
+	
+	@Property
+	private Long userCalendarId;
 	
 	@Property
 	@Persist
@@ -47,19 +49,22 @@ public class CalendarUpdate {
 
     @InjectComponent
     private Form calendarForm;
-//    @InjectComponent
-//    private BeanEditForm calendarForm1;
+    
+    @InjectComponent
+    private Form createForm;
     
     Long onPassivate() {
         return calendarId;
     }
     
-    void onActivate(Long calendarId) {
+    void onActivate(Long calendarId, Long employeeId) {
+    	//System.out.println("Cal id: " + calendarId + " empl id: " + employeeId);
         this.calendarId = calendarId;
+        this.employeeId = employeeId;
     }
     
     void setupRender() {
-        userCalendar = userCalendarDAO.findUserCalendar(calendarId);
+        userCalendar = userCalendarDAO.findUserCalendar(calendarId,employeeId);
     }
     
 
@@ -71,8 +76,8 @@ public class CalendarUpdate {
 
         try {
         	
-            if (selStart != null) calendar.setWorkStart(selStart);
-            if (selEnd != null)calendar.setWorkEnd(selEnd);
+            if (selStart != null) userCalendar.setWorkStart(selStart);
+            if (selEnd != null)userCalendar.setWorkEnd(selEnd);
             
             userCalendarDAO.updateUserCalendar(userCalendar);
         } catch (Exception e) {
@@ -81,6 +86,37 @@ public class CalendarUpdate {
         	calendarForm.recordError(e.getMessage());
         }
     }
+    
+    void onPrepareFromCreateForm() throws Exception {
+        userCalendar = new UserCalendar();
+    }
+    
+    void onValidateFromCreateForm() {
+
+        if (createForm.getHasErrors()) {
+            // We get here only if a server-side validator detected an error.
+            return;
+        }
+
+        try {
+        	if (selStart != null) userCalendar.setWorkStart(selStart);
+            if (selEnd != null)userCalendar.setWorkEnd(selEnd);
+            System.out.println("Cal id: " + this.calendarId + " empl id: " + this.employeeId);
+            userCalendar.setCalendarId(this.calendarId);
+            userCalendar.setUserId(this.employeeId);
+            
+            userCalendarDAO.createUserCalendar(userCalendar);
+        } catch (Exception e) {
+            // Display the cause. In a real system we would try harder to get a
+            // user-friendly message.
+        	calendarForm.recordError(e.getMessage());
+        }
+    }
+    
+    void onSuccessFromCreateForm() {
+    	userCalendarId = userCalendar.getCalendarId();
+    }
+      
     
     Object onSuccess()
     {
