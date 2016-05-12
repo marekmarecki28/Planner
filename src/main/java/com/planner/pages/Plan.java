@@ -16,11 +16,16 @@ import org.apache.tapestry5.services.SelectModelFactory;
 
 import com.planner.dao.CalendarDAO;
 import com.planner.dao.EmployeeDAO;
+import com.planner.dao.UserCalendarDAO;
 import com.planner.encoders.EmployeeEncoder;
 import com.planner.entities.Calendar;
 import com.planner.entities.Employee;
+import com.planner.entities.UserCalendar;
 
 public class Plan {
+	
+	private int hourDiff;
+	private int minuteDiff;
 	
 	@Property
 	private Long employeeId;
@@ -31,6 +36,9 @@ public class Plan {
 	
 	@Property
 	private Calendar calendar;
+	
+	@Property
+	private String userWorkHoursWeekly;
 	
 	@Property
 	private Long calendarId;
@@ -52,6 +60,9 @@ public class Plan {
 	
 	@Inject
 	private CalendarDAO calendarDAO;
+	
+	@Inject
+	private UserCalendarDAO userCalendarDAO;
 	
 	@InjectComponent("calendarForm")
     private Form form;
@@ -97,6 +108,7 @@ public class Plan {
 		
 		if (employeeId != null) {
             employee = findPersonInList(employeeId, employees);
+            setUserWorkHoursWeekly(this.week,employeeId);
         }
 		
         personsModel = selectModelFactory.create(employees, "fullName");
@@ -166,5 +178,56 @@ public class Plan {
 	public Integer getYear() {
 		return this.year;
 	}
+	
+	public void setUserWorkHoursWeekly(Integer week, Long employeeId)
+    {
+		StringBuffer sb = new StringBuffer();
+		List<UserCalendar> listCalendars = userCalendarDAO.getUserWorkHoursWeekly(week,employeeId);
+		this.hourDiff = 0;
+		this.minuteDiff = 0;
+		System.out.println("START HOUR DIFF= " + this.hourDiff + " MINUTE DIFF= " + this.minuteDiff);
+		for (UserCalendar cal : listCalendars)
+		{
+			String start = cal.getWorkStart();
+			String end = cal.getWorkEnd();
+			
+			if(start != null && end != null)
+			{
+				String startHour = start.split(":")[0].substring(0,1).equals("0") ? start.split(":")[0].substring(1) : start.split(":")[0];
+				String startMinutes = start.split(":")[1].substring(0,1).equals("0") ? "0": start.split(":")[1];
+				
+				String endHour = end.split(":")[0].substring(0,1).equals("0") ? end.split(":")[0].substring(1) : end.split(":")[0];
+				String endMinutes = end.split(":")[1].substring(0,1).equals("0") ? "0" : end.split(":")[1];
+				
+				System.out.println("START Hour: " + startHour + " minutes: " + startMinutes);
+				System.out.println("END Hour: " + endHour + " minutes: " + endMinutes);
+				
+				this.hourDiff += Integer.parseInt(endHour) - Integer.parseInt(startHour);
+				this.minuteDiff += Integer.parseInt(endMinutes) - Integer.parseInt(startMinutes);
+				
+				sb.append(cal.getWorkStart() + " - " + cal.getWorkEnd() + "\n");
+			}
+		}
+//		System.out.println(" HOUR DIFF= " + this.hourDiff + " AND MINUTES DIFF= " + this.minuteDiff);
+		
+		if(this.minuteDiff > 30)
+		{
+			for(int i=0; i<this.minuteDiff;i=i+60)
+			{
+				this.hourDiff++;
+				this.minuteDiff = this.minuteDiff - 60;
+			}
+		}
+		
+		System.out.println("END HOUR DIFF= " + this.hourDiff + " MINUTE DIFF= " + this.minuteDiff);
+		
+		String out = "Pracownik przepracowa³: " + this.hourDiff + " godzin";
+		String outMn = " i " + this.minuteDiff + " minut";
+		
+		if(this.minuteDiff > 0)
+			out = out + outMn;
+		
+		this.userWorkHoursWeekly = out;
+    }
 	
 }

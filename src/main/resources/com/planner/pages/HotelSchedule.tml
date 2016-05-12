@@ -8,7 +8,7 @@
 		<br/>
 		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:add="users">
 			<p:usersCell>
-               <t:grid t:source="hotelCalendar.listUserCalendarDescr" t:reorder="fullName,workStart,workEnd,description" t:exclude="calendarId,employeeId" style="width: 100%"/>
+               <t:grid t:source="hotelCalendar.listUserCalendarDescr" t:reorder="fullName,workStart,workEnd,description" t:exclude="calendarId,employeeId"/>
             </p:usersCell>
         </table>
 		<br/>

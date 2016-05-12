@@ -125,11 +125,54 @@ public class CalendarUpdate {
     
     public List<String> getHours() {
     	List<String> list= new ArrayList<String>();
-    	
-        for(Integer i=0; i< 24; i++)
-        {
-        	list.add(i,i.toString());
-        }
+		list.add("06:00");
+		list.add("06:30");
+		list.add("07:00");
+		list.add("07:30");
+		list.add("08:00");
+		list.add("08:30");
+		list.add("09:00");
+		list.add("09:30");
+		list.add("10:00");
+		list.add("10:30");
+		list.add("11:00");
+		list.add("11:30");
+		list.add("12:00");
+		list.add("12:30");
+		list.add("13:00");
+		list.add("13:30");
+		list.add("14:00");
+		list.add("14:30");
+		list.add("15:00");
+		list.add("15:30");
+		list.add("16:00");
+		list.add("16:30");
+		list.add("17:00");
+		list.add("17:30");
+		list.add("18:00");
+		list.add("18:30");
+		list.add("19:00");
+		list.add("19:30");
+		list.add("20:00");
+		list.add("20:30");
+		list.add("21:00");
+		list.add("21:30");
+		list.add("22:00");
+		list.add("22:30");
+		list.add("23:00");
+		list.add("23:30");
+		list.add("00:00");
+		list.add("00:30");
+		list.add("01:00");
+		list.add("01:30");
+		list.add("02:00");
+		list.add("02:30");
+		list.add("03:00");
+		list.add("03:30");
+		list.add("04:00");
+		list.add("04:30");
+		list.add("05:00");
+		list.add("05:30");
         
         return list;
     }

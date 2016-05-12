@@ -13,11 +13,15 @@
 				<input t:type="TextField" t:id="updDescription" value="userCalendar.description" t:validate="maxlength=100" size="10"/>
 				<br/>
 				<t:label for="updWorkStart"/>
-				<input t:type="TextField" t:id="updWorkStart" value="userCalendar.workStart" t:validate="maxlength=5" size="10"/>
+				<t:select t:id="updWorkStart" value="userCalendar.workStart" model="hours"/>
 				<br/>
+<!-- 				<input t:type="TextField" t:id="updWorkStart" value="userCalendar.workStart" t:validate="maxlength=5" size="10"/> -->
+<!-- 				<br/> -->
 				<t:label for="updWorkEnd"/>
-				<input t:type="TextField" t:id="updWorkEnd" value="userCalendar.workEnd" t:validate="maxlength=5" size="10"/>
+				<t:select t:id="updWorkEnd" value="userCalendar.workEnd" model="hours"/>
 				<br/>
+<!-- 				<input t:type="TextField" t:id="updWorkEnd" value="userCalendar.workEnd" t:validate="maxlength=5" size="10"/> -->
+<!-- 				<br/> -->
 				<input t:type="submit" t:value="Zapisz"/>
             </form>
         </t:if>
@@ -27,13 +31,17 @@
 				<input t:type="TextField" t:id="crtDescription" value="userCalendar.description" t:validate="maxlength=100" size="10"/>
 				<br/>
 				<t:label for="crtWorkStart"/>
-				<input t:type="TextField" t:id="crtWorkStart" value="userCalendar.workStart" t:validate="maxlength=5" size="10"/>
+				<t:select t:id="crtWorkStart" value="userCalendar.workStart" model="hours"/>
 				<br/>
+<!-- 				<input t:type="TextField" t:id="crtWorkStart" value="userCalendar.workStart" t:validate="maxlength=5" size="10"/> -->
+<!-- 				<br/> -->
 				<t:label for="crtWorkEnd"/>
-				<input t:type="TextField" t:id="crtWorkEnd" value="userCalendar.workEnd" t:validate="maxlength=5" size="10"/>
+				<t:select t:id="crtWorkEnd" value="userCalendar.workEnd" model="hours"/>
 				<br/>
+<!-- 				<input t:type="TextField" t:id="crtWorkEnd" value="userCalendar.workEnd" t:validate="maxlength=5" size="10"/> -->
+<!-- 				<br/> -->
 				<input t:type="submit" t:value="Zapisz"/>
-            </form>>
+            </form>
         </t:if>
         <a t:type="pageLink" t:page="plan" href="#">Cancel</a>
     </div>

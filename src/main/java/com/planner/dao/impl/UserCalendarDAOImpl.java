@@ -1,5 +1,7 @@
 package com.planner.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -50,4 +52,10 @@ public class UserCalendarDAOImpl implements UserCalendarDAO {
 	      }
 	}
 
+	@Override
+	public List<UserCalendar> getUserWorkHoursWeekly(Integer week, Long employeeId) {
+		String query = "select uc.usercalendar_id, uc.calendar_id, uc.user_id, uc.work_start, uc.work_end, uc.description from calendar c ,usercalendar uc where c.calendar_id = uc.calendar_id and c.week = " + week + " and c.working_date like '%2016%' and uc.user_id = " + employeeId + " order by calendar_id asc";
+		List<UserCalendar> calendars = session.createSQLQuery(query).addEntity(UserCalendar.class).list();
+		return calendars;
+	}
 }
