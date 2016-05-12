@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -38,6 +39,9 @@ public class HotelSchedule {
 	{
 		this.week = this.week - 1;
 	}
+	
+	@Import(stylesheet="context:style.css")
+	void afterRender() { }
 	
 	void onSelectedFromDown()
 	{

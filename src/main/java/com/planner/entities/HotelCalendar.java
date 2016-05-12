@@ -7,12 +7,12 @@ public class HotelCalendar {
 	
 	public HotelCalendar(){}
 	
-	public HotelCalendar(Date workDate, List<UserCalendar> listUserCalendar) {
+	public HotelCalendar(Date workDate, List<UserCalendarDescr> listUserCalendarDescr) {
 		this.workDate = workDate;
-		this.listUserCalendar = listUserCalendar;
+		this.listUserCalendarDescr = listUserCalendarDescr;
 	}
 	private Date workDate;
-	private List<UserCalendar> listUserCalendar;
+	private List<UserCalendarDescr> listUserCalendarDescr;
 	
 	public Date getWorkDate() {
 		return workDate;
@@ -22,10 +22,12 @@ public class HotelCalendar {
 		this.workDate = workDate;
 	}
 
-	public List<UserCalendar> getListUserCalendar() {
-		return listUserCalendar;
+	public List<UserCalendarDescr> getListUserCalendarDescr() {
+		return listUserCalendarDescr;
 	}
-	public void setListUserCalendar(List<UserCalendar> listUserCalendar) {
-		this.listUserCalendar = listUserCalendar;
+
+	public void setListUserCalendarDescr(List<UserCalendarDescr> listUserCalendarDescr) {
+		this.listUserCalendarDescr = listUserCalendarDescr;
 	}
+	
 }

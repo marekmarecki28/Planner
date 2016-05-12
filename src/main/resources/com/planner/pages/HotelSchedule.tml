@@ -2,28 +2,18 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
-<!-- 	<t:Form> -->
-<!-- 		<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/> -->
-<!-- 		<br/> -->
-<!-- 		<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId" t:add="action"> -->
-<!-- 			<p:actionCell> -->
-<!--                <t:grid t:source="calendarsWeek"/> -->
-<!--             </p:actionCell> -->
-<!--         </table> -->
-<!-- 		<br/> -->
-<!-- 		<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/> -->
-<!-- 	</t:Form> -->
-	
+
 	<t:Form>
 		<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 		<br/>
 		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:add="users">
 			<p:usersCell>
-               <t:grid t:source="hotelCalendar.listUserCalendar"/>
+               <t:grid t:source="hotelCalendar.listUserCalendarDescr" t:reorder="fullName,workStart,workEnd,description" t:exclude="calendarId,employeeId" style="width: 100%"/>
             </p:usersCell>
         </table>
 		<br/>
 		<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>
 	</t:Form>
+	
 
 </html>
