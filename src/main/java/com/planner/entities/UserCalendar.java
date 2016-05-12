@@ -15,16 +15,20 @@ public class UserCalendar {
 	
 	public UserCalendar(){}
 	
-	public UserCalendar(Long calendarId, String description, Long userId, String workStart, String workEnd) {
+	public UserCalendar(Long userCalendarId, Long calendarId, String description, Long userId, String workStart,
+			String workEnd) {
+		this.userCalendarId = userCalendarId;
 		this.calendarId = calendarId;
 		this.description = description;
 		this.userId = userId;
 		this.workStart = workStart;
 		this.workEnd = workEnd;
 	}
-	
+
 	@Id
 	@NonVisual
+	@Column(name = "USERCALENDAR_ID")
+	private Long userCalendarId;	
 	@Column(name = "CALENDAR_ID")
 	private Long calendarId;
 	private String description;
@@ -34,6 +38,13 @@ public class UserCalendar {
 	private String workStart;
 	@Column(name = "WORK_END")
 	private String workEnd;
+	
+	public Long getUserCalendarId() {
+		return userCalendarId;
+	}
+	public void setUserCalendarId(Long userCalendarId) {
+		this.userCalendarId = userCalendarId;
+	}
 	public Long getCalendarId() {
 		return calendarId;
 	}

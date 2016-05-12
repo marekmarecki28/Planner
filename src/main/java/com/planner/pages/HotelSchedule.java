@@ -10,7 +10,9 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.planner.dao.CalendarDAO;
+import com.planner.dao.HotelCalendarDAO;
 import com.planner.entities.Calendar;
+import com.planner.entities.HotelCalendar;
 
 public class HotelSchedule {
 
@@ -23,8 +25,14 @@ public class HotelSchedule {
 	@Property
 	private Calendar calendar;
 	
+	@Property
+	private HotelCalendar hotelCalendar;
+	
 	@Inject
 	private CalendarDAO calendarDAO;
+	
+	@Inject
+	private HotelCalendarDAO hotelCalendarDAO;
 	
 	void onSelectedFromUp()
 	{
@@ -43,6 +51,10 @@ public class HotelSchedule {
 			setWeek();
 			setYear();
 		}
+	}
+	
+	public List<HotelCalendar> getHotelCalendars(){
+		return hotelCalendarDAO.getHotelCalendars(this.week, this.year);
 	}
 	
 	public List<Calendar> getCalendarsWeek()

@@ -18,10 +18,12 @@ import org.slf4j.Logger;
 
 import com.planner.dao.CalendarDAO;
 import com.planner.dao.EmployeeDAO;
+import com.planner.dao.HotelCalendarDAO;
 import com.planner.dao.HotelDAO;
 import com.planner.dao.UserCalendarDAO;
 import com.planner.dao.impl.CalendarDAOImpl;
 import com.planner.dao.impl.EmployeeDAOImpl;
+import com.planner.dao.impl.HotelCalendarDAOImpl;
 import com.planner.dao.impl.HotelDAOImpl;
 import com.planner.dao.impl.UserCalendarDAOImpl;
 
@@ -38,6 +40,7 @@ public class AppModule
     	binder.bind(EmployeeDAO.class, EmployeeDAOImpl.class);
     	binder.bind(CalendarDAO.class, CalendarDAOImpl.class);
     	binder.bind(UserCalendarDAO.class, UserCalendarDAOImpl.class);
+    	binder.bind(HotelCalendarDAO.class, HotelCalendarDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation
