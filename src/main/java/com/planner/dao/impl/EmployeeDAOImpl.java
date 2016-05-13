@@ -2,7 +2,9 @@ package com.planner.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
 import com.planner.dao.EmployeeDAO;
@@ -32,19 +34,32 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return employee;
 	}
 	@Override
-	public List<Employee> getPokojowa() {
-		List<Employee> employees = session.createQuery("from Employee where position_id = 0").list();
+	public List<Employee> getPokojowa(Long hotelId) {
+		List<Employee> employees = session.createQuery("from Employee where position_id = 0 and hotel_id = " + hotelId).list();
 		return employees;
 	}
 	@Override
-	public List<Employee> getLobby() {
-		List<Employee> employees = session.createQuery("from Employee where position_id = 1").list();
+	public List<Employee> getLobby(Long hotelId) {
+		List<Employee> employees = session.createQuery("from Employee where position_id = 1 and hotel_id = " + hotelId).list();
 		return employees;
 	}
 	@Override
-	public List<Employee> getSpa() {
-		List<Employee> employees = session.createQuery("from Employee where position_id = 2").list();
+	public List<Employee> getSpa(Long hotelId) {
+		List<Employee> employees = session.createQuery("from Employee where position_id = 2 and hotel_id = " + hotelId).list();
 		return employees;
+	}
+	@Override
+	public void createEmployee(Employee employee) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 session.save(employee); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
 	}
 
 }

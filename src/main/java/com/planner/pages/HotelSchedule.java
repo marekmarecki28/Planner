@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
@@ -12,7 +13,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.planner.dao.CalendarDAO;
 import com.planner.dao.HotelCalendarDAO;
+import com.planner.dao.HotelDAO;
 import com.planner.entities.Calendar;
+import com.planner.entities.Hotel;
 import com.planner.entities.HotelCalendar;
 
 public class HotelSchedule {
@@ -27,6 +30,9 @@ public class HotelSchedule {
 	private Calendar calendar;
 	
 	@Property
+	private Hotel hotel;
+	
+	@Property
 	private HotelCalendar hotelCalendar;
 	
 	@Inject
@@ -34,6 +40,9 @@ public class HotelSchedule {
 	
 	@Inject
 	private HotelCalendarDAO hotelCalendarDAO;
+	
+	@Inject
+	private HotelDAO hotelDAO;
 	
 	void onSelectedFromUp()
 	{
@@ -48,8 +57,21 @@ public class HotelSchedule {
 		this.week = this.week + 1;
 	}
 	
-	void onActivate()
+	void onActivate(EventContext context)
 	{
+		
+		if(context.getCount() > 0)
+    	{
+    		if(hotel == null)
+        		hotel = hotelDAO.getHotelById(context.get(Long.class,0));
+    		
+    		if(hotel != null && hotel.getHotelId() != context.get(Long.class,0))
+    		{
+    			hotel = hotelDAO.getHotelById(context.get(Long.class,0));
+    		}
+
+    	}
+		
 		if (this.year == null || this.week == null)
 		{
 			setWeek();
@@ -58,7 +80,7 @@ public class HotelSchedule {
 	}
 	
 	public List<HotelCalendar> getHotelCalendars(){
-		return hotelCalendarDAO.getHotelCalendars(this.week, this.year);
+		return hotelCalendarDAO.getHotelCalendars(this.week, this.year,hotel.getHotelId());
 	}
 	
 	public List<Calendar> getCalendarsWeek()

@@ -1,0 +1,24 @@
+<html t:type="layout" title="Plan"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<h1>Tworzenie nowego pracownika.</h1>
+
+	<div class="eg">
+           <t:beaneditform t:id="createEmployeeForm" object="employee" t:exclude="employeeId,hotelId" submitLabel="Zapisz">
+           		<p:positionId>
+           			<t:label for="crtPos"/>:
+           			<t:select t:id="crtPos" value="employee.positionId" model="positions" t:encoder="positionEncoder"/>
+           		</p:positionId>
+           </t:beaneditform>
+           
+
+<!-- 			<t:form type="form" t:id="createEmployeeForm" class="well"> -->
+<!--             	<t:label for="crtDescription"/> -->
+<!-- 				<input t:type="TextField" t:id="crtDescription" value="employee.description" t:validate="maxlength=100" size="10"/> -->
+<!-- 				<br/> -->
+<!-- 				<input t:type="submit" t:value="Zapisz"/> -->
+<!--             </t:form> -->
+    </div>
+
+</html>

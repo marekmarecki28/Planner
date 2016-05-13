@@ -41,6 +41,7 @@ public class AppModule
     	binder.bind(CalendarDAO.class, CalendarDAOImpl.class);
     	binder.bind(UserCalendarDAO.class, UserCalendarDAOImpl.class);
     	binder.bind(HotelCalendarDAO.class, HotelCalendarDAOImpl.class);
+    	binder.bind(PositionsDAO.class, PositionsDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation

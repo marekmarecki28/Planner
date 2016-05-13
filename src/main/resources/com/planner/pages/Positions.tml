@@ -10,4 +10,7 @@
 	
 	<h4>Spa:</h4>
 	<table t:type="grid" t:source="spa" t:row="employee" t:include="firstName,lastName,description"/>
+	
+	<br/>
+	<a t:type="pagelink" t:page="createEmployee" t:context="hotel.hotelId" href="#"><button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowego pracownika</button></a>
 </html>

@@ -6,6 +6,6 @@ import com.planner.entities.HotelCalendar;
 
 public interface HotelCalendarDAO {
 
-	List<HotelCalendar> getHotelCalendars(Integer week, Integer year);
+	List<HotelCalendar> getHotelCalendars(Integer week, Integer year, Long hotelId);
 
 }

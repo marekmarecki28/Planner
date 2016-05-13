@@ -8,7 +8,8 @@ public interface EmployeeDAO {
 	public List<String> getEmployeeNames();
 	public List<Employee> getEmployees(Long hotelId);
 	public Employee getEmployee(Long id);
-	public List<Employee> getPokojowa();
-	public List<Employee> getLobby();
-	public List<Employee> getSpa();
+	public List<Employee> getPokojowa(Long hotelId);
+	public List<Employee> getLobby(Long hotelId);
+	public List<Employee> getSpa(Long hotelId);
+	public void createEmployee(Employee employee);
 }

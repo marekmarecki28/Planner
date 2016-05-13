@@ -22,22 +22,20 @@ public class Employee implements Serializable{
 	
 	public Employee(){
 	}
-
-
-
-	public Employee(Long employee_id, String firstName, String lastName, Long age, String sex, String email,
-			String description) {
-		this.employeeId = employee_id;
+	
+	public Employee(Long employeeId, String firstName, String lastName, Long age, String sex, String email,
+			String description, String fullName, Long hotelId, Long positionId) {
+		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.sex = sex;
 		this.email = email;
 		this.description = description;
-		this.fullName = firstName + " " +lastName;
+		this.fullName = fullName;
+		this.hotelId = hotelId;
+		this.positionId = positionId;
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +50,11 @@ public class Employee implements Serializable{
 	private String email;
 	private String description;
 	private String fullName;
+
+	@Column(name = "HOTEL_ID")
+	private Long hotelId;
+	@Column(name = "POSITION_ID")
+	private Long positionId;
 	
 	public Long getEmployeeId() {
 		return employeeId;
@@ -105,7 +108,22 @@ public class Employee implements Serializable{
 		return fullName;
 	}
 
+	public Long getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(Long hotelId) {
+		this.hotelId = hotelId;
+	}
 	
+	public Long getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(Long positionId) {
+		this.positionId = positionId;
+	}
+
 	@Override
 	public String toString() {
         final String DIVIDER = ", ";
