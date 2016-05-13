@@ -7,22 +7,27 @@ import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import com.planner.dao.CalendarDAO;
+import com.planner.dao.EmployeeDAO;
 import com.planner.dao.UserCalendarDAO;
 import com.planner.entities.Calendar;
+import com.planner.entities.Employee;
 import com.planner.entities.UserCalendar;
 
 public class CalendarUpdate {
 	
 	@Property
-	@Persist
 	private Long employeeId;
 	
 	@Property
-	@Persist
 	private Long calendarId;
+	
+	@Property
+	private Long hotelId;
 	
 	@Property
 	private Long userCalendarId;
@@ -30,6 +35,10 @@ public class CalendarUpdate {
 	@Property
 	@Persist
 	private Calendar calendar;
+	
+	@Property
+	@Persist
+	private Employee employee;
 	
 	@Property
 	@Persist
@@ -43,24 +52,46 @@ public class CalendarUpdate {
 	
 	@Inject
 	private UserCalendarDAO userCalendarDAO;
+	
+	@Inject
+	private EmployeeDAO employeeDAO;
+	
+	@Inject
+	private CalendarDAO calendarDAO;
 
 	@InjectPage
 	private Plan plan;
 
     @InjectComponent
-    private Form calendarForm;
+    private BeanEditForm calendarForm;
     
     @InjectComponent
     private Form createForm;
     
-    Long onPassivate() {
-        return calendarId;
+    
+//    void onActivate(Long calendarId, Long employeeId) {
+//    	//System.out.println("Cal id: " + calendarId + " empl id: " + employeeId);
+//        this.calendarId = calendarId;
+//        this.employeeId = employeeId;
+//    }
+    
+    Long onPassivate()
+    {
+    	return this.hotelId;
     }
     
-    void onActivate(Long calendarId, Long employeeId) {
-    	//System.out.println("Cal id: " + calendarId + " empl id: " + employeeId);
-        this.calendarId = calendarId;
-        this.employeeId = employeeId;
+    void onActivate(Long hotelId, Long employeeId, Long calendarId) {
+    	System.out.println("OnActivate");
+
+    	if(employee == null) employee = employeeDAO.getEmployee(employeeId);
+    	if(calendar == null) calendar = calendarDAO.findCalendar(calendarId);
+    	
+    	if(employee != null && employee.getEmployeeId() != employeeId) employee = employeeDAO.getEmployee(employeeId);
+    	if(calendar != null && calendar.getCalendarId() != calendarId) calendar = calendarDAO.findCalendar(calendarId);
+    	
+    	this.employeeId = employee.getEmployeeId();
+    	this.calendarId = calendar.getCalendarId();
+    	this.hotelId = hotelId;
     }
     
     void setupRender() {
@@ -83,8 +114,10 @@ public class CalendarUpdate {
         } catch (Exception e) {
             // Display the cause. In a real system we would try harder to get a
             // user-friendly message.
+        	System.out.println("ERRRORORRO!!!");
         	calendarForm.recordError(e.getMessage());
         }
+        System.out.println("END onValidateFromCalendarForm!!!");
     }
     
     void onPrepareFromCreateForm() throws Exception {
@@ -92,7 +125,6 @@ public class CalendarUpdate {
     }
     
     void onValidateFromCreateForm() {
-
         if (createForm.getHasErrors()) {
             // We get here only if a server-side validator detected an error.
             return;
@@ -101,9 +133,9 @@ public class CalendarUpdate {
         try {
         	if (selStart != null) userCalendar.setWorkStart(selStart);
             if (selEnd != null)userCalendar.setWorkEnd(selEnd);
-            System.out.println("Cal id: " + this.calendarId + " empl id: " + this.employeeId);
-            userCalendar.setCalendarId(this.calendarId);
-            userCalendar.setUserId(this.employeeId);
+            System.out.println("Cal id: " + calendar.getCalendarId() + " empl id: " + employee.getEmployeeId());
+            userCalendar.setCalendarId(calendar.getCalendarId());
+            userCalendar.setUserId(employee.getEmployeeId());
             
             userCalendarDAO.createUserCalendar(userCalendar);
         } catch (Exception e) {
@@ -120,6 +152,7 @@ public class CalendarUpdate {
     
     Object onSuccess()
     {
+    	System.out.println("END onSuccess!!!");
     	return Plan.class;
     }
     

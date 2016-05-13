@@ -16,10 +16,12 @@ import org.apache.tapestry5.services.SelectModelFactory;
 
 import com.planner.dao.CalendarDAO;
 import com.planner.dao.EmployeeDAO;
+import com.planner.dao.HotelDAO;
 import com.planner.dao.UserCalendarDAO;
 import com.planner.encoders.EmployeeEncoder;
 import com.planner.entities.Calendar;
 import com.planner.entities.Employee;
+import com.planner.entities.Hotel;
 import com.planner.entities.UserCalendar;
 
 public class Plan {
@@ -31,8 +33,15 @@ public class Plan {
 	private Long employeeId;
 	
 	@Property
+	private Long hotelId;
+	
+	@Property
 	@Persist
 	private Employee employee;
+	
+	@Property
+	@Persist
+	private Hotel hotel;
 	
 	@Property
 	private Calendar calendar;
@@ -64,6 +73,9 @@ public class Plan {
 	@Inject
 	private UserCalendarDAO userCalendarDAO;
 	
+	@Inject
+	private HotelDAO hotelDAO;
+	
 	@InjectComponent("calendarForm")
     private Form form;
 	
@@ -72,9 +84,9 @@ public class Plan {
 		return employeeDAO.getEmployeeNames();
 	}
 	
-	public List<Employee> getEmployees()
+	public List<Employee> getEmployees(Long hotelId)
 	{
-		return employeeDAO.getEmployees();
+		return employeeDAO.getEmployees(hotelId);
 	}
 	
 	public EmployeeEncoder getEmployeeEncoder()
@@ -82,15 +94,25 @@ public class Plan {
 		return new EmployeeEncoder(employeeDAO);
 	}
 	
-	Long onPassivate() {
-        return employeeId;
-    }
+	Long onPassivate()
+	{
+		return hotelId;
+	}
+	
+	void onActivate(EventContext context) {
+    	
+    	if(context.getCount() > 0)
+    	{
+    		if(hotel == null)
+        		hotel = hotelDAO.getHotelById(context.get(Long.class,0));
+    		
+    		if(hotel != null && hotel.getHotelId() != context.get(Long.class,0))
+    		{
+    			hotel = hotelDAO.getHotelById(context.get(Long.class,0));
+    		}
 
-    void onActivate(EventContext context) {
-        if (context.getCount() > 0) {
-            employeeId = context.get(Long.class, 0);
-        }
-        
+    	}
+
         employeeId = employee == null ? null : employee.getEmployeeId();
         
         if(this.week == null)
@@ -102,9 +124,70 @@ public class Plan {
         	setYear();
 		}
     }
+
+//    void onActivate(EventContext context) {
+//    	System.out.println("111111111111111111 ONACTIVATE " + context.getCount());
+//        if (context.getCount() == 1) {
+//			this.hotelId = context.get(Long.class, 0);
+//			System.out.println("111111111111111111 Htl " + context.get(Long.class, 0));
+//        }
+//        else if (context.getCount() > 1) {
+//			this.hotelId = context.get(Long.class, 0);
+//			this.employeeId = context.get(Long.class, 1);
+//			System.out.println("111111111111111111 Hotl " + context.get(Long.class, 0));
+//			System.out.println("111111111111111111 Empl " + context.get(Long.class, 1));
+//        }
+//        
+//        employeeId = employee == null ? null : employee.getEmployeeId();
+//        
+//        if(this.week == null)
+//		{
+//        	setWeek();
+//		}
+//        if(this.year == null)
+//		{
+//        	setYear();
+//		}
+//    }
+	
+//	void onActivate(Long hotelId, Long employeeId)
+//	{
+//		System.out.println("111111111111111111 ONACTIVATE");
+//		this.hotelId = hotelId;
+//		this.employeeId = employeeId;
+//		
+//		employeeId = employee == null ? null : employee.getEmployeeId();
+//      
+//		if(this.week == null)
+//		{
+//			setWeek();
+//		}
+//		if(this.year == null)
+//		{
+//			setYear();
+//		}
+//	}
+//	
+//	void onActivate(Long hotelId, Long employeeId, Long calendarId)
+//	{
+//		System.out.println("33333333333333333333 ONACTIVATE");
+//		this.hotelId = hotelId;
+//		this.employeeId = employeeId;
+//		
+//		if(employeeId == null) employeeId = employee == null ? null : employee.getEmployeeId();
+//      
+//		if(this.week == null)
+//		{
+//			setWeek();
+//		}
+//		if(this.year == null)
+//		{
+//			setYear();
+//		}
+//	}
 	
 	void onPrepareForRender() {
-		List<Employee> employees = getEmployees();
+		List<Employee> employees = getEmployees(hotel.getHotelId());
 		
 		if (employeeId != null) {
             employee = findPersonInList(employeeId, employees);
@@ -116,6 +199,7 @@ public class Plan {
 	
 	void onValidateFromForm() {
         employeeId = employee == null ? null : employee.getEmployeeId();
+        hotelId = hotel == null ? null : hotel.getHotelId();
     }
 	
 	private Employee findPersonInList(Long employeeId, List<Employee> employees) 
@@ -158,7 +242,6 @@ public class Plan {
 	
 	public void setWeek()
 	{
-		System.out.println("SET WEEk");
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String currentDate=  df.format(new Date());
 		Integer week = calendarDAO.getWeekOfDate(currentDate);
@@ -167,7 +250,6 @@ public class Plan {
 	
 	public void setYear()
 	{
-		System.out.println("SET YEAR");
 		this.year = 1900 + new Date().getYear();
 	}
 
@@ -185,7 +267,6 @@ public class Plan {
 		List<UserCalendar> listCalendars = userCalendarDAO.getUserWorkHoursWeekly(week,employeeId);
 		this.hourDiff = 0;
 		this.minuteDiff = 0;
-		System.out.println("START HOUR DIFF= " + this.hourDiff + " MINUTE DIFF= " + this.minuteDiff);
 		for (UserCalendar cal : listCalendars)
 		{
 			String start = cal.getWorkStart();
@@ -199,16 +280,12 @@ public class Plan {
 				String endHour = end.split(":")[0].substring(0,1).equals("0") ? end.split(":")[0].substring(1) : end.split(":")[0];
 				String endMinutes = end.split(":")[1].substring(0,1).equals("0") ? "0" : end.split(":")[1];
 				
-				System.out.println("START Hour: " + startHour + " minutes: " + startMinutes);
-				System.out.println("END Hour: " + endHour + " minutes: " + endMinutes);
-				
 				this.hourDiff += Integer.parseInt(endHour) - Integer.parseInt(startHour);
 				this.minuteDiff += Integer.parseInt(endMinutes) - Integer.parseInt(startMinutes);
 				
 				sb.append(cal.getWorkStart() + " - " + cal.getWorkEnd() + "\n");
 			}
 		}
-//		System.out.println(" HOUR DIFF= " + this.hourDiff + " AND MINUTES DIFF= " + this.minuteDiff);
 		
 		if(this.minuteDiff > 30)
 		{
@@ -219,9 +296,8 @@ public class Plan {
 			}
 		}
 		
-		System.out.println("END HOUR DIFF= " + this.hourDiff + " MINUTE DIFF= " + this.minuteDiff);
 		
-		String out = "Pracownik przepracowa³: " + this.hourDiff + " godzin";
+		String out = "Pracownik przepracowaÅ‚: " + this.hourDiff + " godzin";
 		String outMn = " i " + this.minuteDiff + " minut";
 		
 		if(this.minuteDiff > 0)

@@ -21,8 +21,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		return employeeNames;
 	}
 	@Override
-	public List<Employee> getEmployees() {
-		List<Employee> employees = session.createCriteria(Employee.class).list();
+	public List<Employee> getEmployees(Long hotelId) {
+		List<Employee> employees = session.createQuery("from Employee where hotel_id = " + hotelId).list();
 		return employees;
 	}
 	@Override

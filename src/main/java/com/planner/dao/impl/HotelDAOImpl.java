@@ -27,4 +27,10 @@ public class HotelDAOImpl implements HotelDAO{
 		List<String> hotelNames = session.createCriteria(Hotel.class).setProjection(Projections.property("hotelName")).list();
 		return hotelNames;
 	}
+
+	@Override
+	public Hotel getHotelById(Long hotelId) {
+		Hotel hotel = (Hotel) session.createQuery("from Hotel where hotel_id = " + hotelId).uniqueResult();
+		return hotel;
+	}
 }

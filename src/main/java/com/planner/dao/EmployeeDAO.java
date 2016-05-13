@@ -6,7 +6,7 @@ import com.planner.entities.Employee;
 
 public interface EmployeeDAO {
 	public List<String> getEmployeeNames();
-	public List<Employee> getEmployees();
+	public List<Employee> getEmployees(Long hotelId);
 	public Employee getEmployee(Long id);
 	public List<Employee> getPokojowa();
 	public List<Employee> getLobby();

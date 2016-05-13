@@ -4,13 +4,13 @@
 
 	<table t:type="grid" t:source="hotels" t:row="hotel" t:add="positions,employees,schedule">
 		<p:positionsCell>
-			<a t:type="pagelink" t:page="positions" href="#">Stanowiska</a>
+			<a t:type="pagelink" t:page="positions" t:context="hotel.hotelId" href="#">Stanowiska</a>
 		</p:positionsCell>
 		<p:employeesCell>
-			<a t:type="pagelink" t:page="plan" href="#">Pracownicy</a>
+			<a t:type="pagelink" t:page="plan" t:context="hotel.hotelId" href="#">Pracownicy</a>
 		</p:employeesCell>
 		<p:scheduleCell>
-			<a t:type="pagelink" t:page="hotelSchedule" href="#">Grafik pracy</a>
+			<a t:type="pagelink" t:page="hotelSchedule" t:context="hotel.hotelId" href="#">Grafik pracy</a>
 		</p:scheduleCell>
 	</table>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowy hotel</button>

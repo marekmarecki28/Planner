@@ -20,7 +20,7 @@
 				<br/>
 			<table t:type="grid" t:source="calendarsWeek" t:row="calendar" t:exclude="userId" t:reorder="workingDate,workStart,workEnd,description" t:add="action">
 				<p:actionCell>
-		            <a t:type="pageLink" t:page="calendarUpdate" t:context="[calendar.calendarId,employeeId]" href="#">Update</a>
+		            <a t:type="pageLink" t:page="calendarUpdate" t:context="[hotel.hotelId,employee.employeeId,calendar.calendarId]" href="#">Update</a>
 		        </p:actionCell>
 			</table>
 				<br/>

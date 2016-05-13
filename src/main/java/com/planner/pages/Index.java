@@ -6,6 +6,7 @@ import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Log;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
@@ -44,6 +45,7 @@ public class Index
   private HotelDAO hotelDAO;
   
   @Property
+  @Persist
   private Hotel hotel;
   
   public List<Hotel> getHotels()
