@@ -13,4 +13,5 @@ public interface EmployeeDAO {
 	public List<Employee> getSpa(Long hotelId);
 	public void createEmployee(Employee employee);
 	public void updateEmployee(Employee employee);
+	public void deleteEmployee(Long id);
 }

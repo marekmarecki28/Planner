@@ -29,11 +29,11 @@ public class HotelCalendarDAOImpl implements HotelCalendarDAO {
 	public List<HotelCalendar> getHotelCalendars(Integer week, Integer year, Long hotelId) {
 		List<HotelCalendar> listHotelCalendar = new ArrayList<HotelCalendar>();
 		List<Calendar> listCalendar = calendarDAO.getCalendarsWeek(week, year);
-		System.out.println("OUTTTTTTTTTTTTT2----> ");
 		for (Calendar cal : listCalendar)
 		{
 			HotelCalendar hotelCalendar = new HotelCalendar();
 			hotelCalendar.setWorkDate(cal.getWorkingDate());
+			hotelCalendar.setCalendarId(cal.getCalendarId());
 			List<UserCalendar> listUserCalendar = session.createSQLQuery("select uc.usercalendar_id,uc.calendar_id,uc.user_id,uc.work_start,uc.work_end,uc.description from Usercalendar uc, Employee e where uc.user_id = e.employee_id and uc.calendar_id = " + cal.getCalendarId() + " and e.hotel_id = " + hotelId).addEntity(UserCalendar.class).list();
 			
 			List<UserCalendarDescr> listCalendarDescr = new ArrayList<UserCalendarDescr>();

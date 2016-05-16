@@ -3,6 +3,7 @@ package com.planner.pages;
 import java.util.List;
 
 import org.apache.tapestry5.EventContext;
+import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
@@ -30,6 +31,10 @@ public class Positions {
 	
 	@Inject
 	private HotelDAO hotelDAO;
+	
+	@Property
+    @Persist(PersistenceConstants.FLASH)
+    private String errorMessage;
 	
 	void onActivate(EventContext context)
 	{
@@ -60,6 +65,16 @@ public class Positions {
 	{
 		return employeeDAO.getSpa(hotel.getHotelId());
 	}
+
+    void onDelete(Long id) {
+
+        try {
+            employeeDAO.deleteEmployee(id);
+        }
+        catch (Exception e) {
+            errorMessage = e.getMessage();
+        }
+    }
 	
 	
 }

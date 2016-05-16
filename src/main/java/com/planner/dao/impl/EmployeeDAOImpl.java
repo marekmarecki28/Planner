@@ -13,6 +13,7 @@ import com.planner.entities.Employee;
 public class EmployeeDAOImpl implements EmployeeDAO {
 
 	private final Session session;
+	private Employee employee;
 
 	public EmployeeDAOImpl(Session s) {
 		session = s;
@@ -68,6 +69,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		try{
 	         tx = session.getTransaction();
 			 session.update(employee); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
+	}
+	@Override
+	public void deleteEmployee(Long id) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 employee = (Employee) session.load(Employee.class,id);
+			 session.delete(employee);
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.tapestry5.EventContext;
+import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
@@ -14,11 +15,15 @@ import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.planner.dao.CalendarDAO;
+import com.planner.dao.EmployeeDAO;
 import com.planner.dao.HotelCalendarDAO;
 import com.planner.dao.HotelDAO;
+import com.planner.dao.UserCalendarDAO;
 import com.planner.entities.Calendar;
 import com.planner.entities.Hotel;
 import com.planner.entities.HotelCalendar;
+import com.planner.entities.UserCalendar;
+import com.planner.entities.UserCalendarDescr;
 
 public class HotelSchedule {
 
@@ -32,6 +37,9 @@ public class HotelSchedule {
 	private Calendar calendar;
 	
 	@Property
+	private UserCalendarDescr userCalendarDescr;
+	
+	@Property
 	@Persist
 	private Hotel hotel;
 	
@@ -42,10 +50,17 @@ public class HotelSchedule {
 	private CalendarDAO calendarDAO;
 	
 	@Inject
+	private UserCalendarDAO userCalendarDAO;
+	
+	@Inject
 	private HotelCalendarDAO hotelCalendarDAO;
 	
 	@Inject
 	private HotelDAO hotelDAO;
+	
+	@Property
+    @Persist(PersistenceConstants.FLASH)
+    private String errorMessage;
 	
 	void onSelectedFromUp()
 	{
@@ -83,7 +98,6 @@ public class HotelSchedule {
 	}
 	
 	public List<HotelCalendar> getHotelCalendars(){
-		System.out.println("CHECK: ->>>>>>>>>> " + hotel);
 		return hotelCalendarDAO.getHotelCalendars(this.week, this.year,hotel.getHotelId());
 	}
 	
@@ -114,5 +128,15 @@ public class HotelSchedule {
 	public Integer getYear() {
 		return this.year;
 	}
+	
+	void onDelete(Long calendarId,Long employeeId) {
+
+        try {
+            userCalendarDAO.deleteUserCalendarEmployee(calendarId,employeeId);
+        }
+        catch (Exception e) {
+            errorMessage = e.getMessage();
+        }
+    }
 
 }

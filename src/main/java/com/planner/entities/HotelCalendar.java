@@ -12,6 +12,7 @@ public class HotelCalendar {
 		this.listUserCalendarDescr = listUserCalendarDescr;
 	}
 	private Date workDate;
+	private Long calendarId;
 	private List<UserCalendarDescr> listUserCalendarDescr;
 	
 	public Date getWorkDate() {
@@ -28,6 +29,14 @@ public class HotelCalendar {
 
 	public void setListUserCalendarDescr(List<UserCalendarDescr> listUserCalendarDescr) {
 		this.listUserCalendarDescr = listUserCalendarDescr;
+	}
+
+	public Long getCalendarId() {
+		return calendarId;
+	}
+
+	public void setCalendarId(Long calendarId) {
+		this.calendarId = calendarId;
 	}
 	
 }

@@ -6,10 +6,20 @@
 	<t:Form t:id="calendarForm">
 		<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 		<br/>
-		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:add="users">
+		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:add="users,add">
 			<p:usersCell>
-               <t:grid t:source="hotelCalendar.listUserCalendarDescr" t:reorder="fullName,workStart,workEnd,description" t:exclude="calendarId,employeeId"/>
+               <t:grid t:source="hotelCalendar.listUserCalendarDescr" t:row="userCalendarDescr" t:reorder="fullName,workStart,workEnd,description" 
+               t:exclude="calendarId,employeeId" t:add="delete">
+               <p:deleteCell>
+					<a t:type="eventLink" t:event="Delete" t:context="[userCalendarDescr.calendarId,userCalendarDescr.employeeId]"
+                	    t:mixins="Confirm">
+						<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
+			   </p:deleteCell>
+			</t:grid>
             </p:usersCell>
+            <p:addCell>
+				<a t:type="pagelink" t:page="addEmpToCal" t:context="[hotel.hotelId,hotelCalendar.calendarId]" href="#">Dodaj...</a>
+            </p:addCell>
         </table>
 		<br/>
 		<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>

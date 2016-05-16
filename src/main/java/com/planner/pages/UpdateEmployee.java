@@ -15,6 +15,7 @@ import com.planner.dao.EmployeeDAO;
 import com.planner.dao.PositionsDAO;
 import com.planner.encoders.PositionEncoder;
 import com.planner.entities.Employee;
+import com.planner.entities.Hotel;
 import com.planner.entities.Position;
 import com.planner.enums.Sex;
 
@@ -71,7 +72,7 @@ public class UpdateEmployee {
     }
 	
 	Object onSuccess() {
-	    return Index.class;
+	    return Positions.class;
     }
 	
 	void onPrepareForRender() {

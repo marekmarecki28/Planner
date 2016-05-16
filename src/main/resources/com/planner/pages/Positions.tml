@@ -3,24 +3,42 @@
       xmlns:p="tapestry:parameter">
 
 	<h4>Pokojowa:</h4>
-	<table t:type="grid" t:source="pokojowa" t:row="employee" t:include="firstName,lastName,description" t:add="update">
+	<table t:type="grid" t:source="pokojowa" t:row="employee" t:include="firstName,lastName,description" t:add="update,delete">
 		<p:updateCell>
-			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">Aktualizuj</a>
+			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">
+				<img src="${asset:context:assets/update.png}" alt="Update"/></a>
 		</p:updateCell>
+		<p:deleteCell>
+			<a t:type="eventLink" t:event="Delete" t:context="employee.employeeId" 
+                    t:mixins="Confirm" t:message="Delete ${employee.firstName} ${employee.lastName}?">
+				<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
+		</p:deleteCell>
 	</table>
 	
 	<h4>Lobby:</h4>
-	<table t:type="grid" t:source="lobby" t:row="employee" t:include="firstName,lastName,description" t:add="update">
+	<table t:type="grid" t:source="lobby" t:row="employee" t:include="firstName,lastName,description" t:add="update,delete">
 		<p:updateCell>
-			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">Aktualizuj</a>
+			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">
+				<img src="${asset:context:assets/update.png}" alt="Update"/></a>
 		</p:updateCell>
+		<p:deleteCell>
+			<a t:type="eventLink" t:event="Delete" t:context="employee.employeeId" 
+                    t:mixins="Confirm" t:message="Delete ${employee.firstName} ${employee.lastName}?">
+				<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
+		</p:deleteCell>
 	</table>
 	
 	<h4>Spa:</h4>
-	<table t:type="grid" t:source="spa" t:row="employee" t:include="firstName,lastName,description" t:add="update">
+	<table t:type="grid" t:source="spa" t:row="employee" t:include="firstName,lastName,description" t:add="update,delete">
 		<p:updateCell>
-			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">Aktualizuj</a>
+			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">
+				<img src="${asset:context:assets/update.png}" alt="Update"/></a>
 		</p:updateCell>
+		<p:deleteCell>
+			<a t:type="eventLink" t:event="Delete" t:context="employee.employeeId" 
+                    t:mixins="Confirm" t:message="Delete ${employee.firstName} ${employee.lastName}?">
+				<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
+		</p:deleteCell>
 	</table>
 	
 	<br/>

@@ -8,11 +8,13 @@ import org.hibernate.Transaction;
 
 import com.planner.dao.UserCalendarDAO;
 import com.planner.entities.Calendar;
+import com.planner.entities.Employee;
 import com.planner.entities.UserCalendar;
 
 public class UserCalendarDAOImpl implements UserCalendarDAO {
 
 	private final Session session;
+	private UserCalendar userCalendar;
 
 	public UserCalendarDAOImpl(Session s) {
 		session = s;
@@ -58,4 +60,35 @@ public class UserCalendarDAOImpl implements UserCalendarDAO {
 		List<UserCalendar> calendars = session.createSQLQuery(query).addEntity(UserCalendar.class).list();
 		return calendars;
 	}
+
+	@Override
+	public void deleteUserCalendarById(Long id) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 userCalendar = (UserCalendar) session.load(UserCalendar.class,id);
+			 session.delete(userCalendar);
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
+	}
+
+	@Override
+	public void deleteUserCalendarEmployee(Long calendarId, Long employeeId) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 userCalendar = (UserCalendar) session.createQuery("from Usercalendar where calendar_id = " + calendarId + " and employee_id = " + employeeId).uniqueResult();
+			 session.delete(userCalendar);
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
+	}
+
 }

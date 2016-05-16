@@ -1,0 +1,33 @@
+<html t:type="layout" title="Plan"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+<h1>Dodawanie pracownika do grafiku</h1>
+    
+    <div class="eg">
+        <t:if test="userCalendar">
+            <t:beaneditform t:id="calendarForm" object="userCalendar" t:include="userId,description,workStart,workEnd" t:reorder="userId,workStart,workEnd,description" submitLabel="Save">
+            	<p:userId>
+            		<t:label for="employeeMenu"/>
+            		<t:select t:id="employeeMenu" value="employee" model="personsModel" t:encoder="employeeEncoder"/>
+    				<br/>
+            	</p:userId>
+            	<p:workStart>
+	            	<br/>
+					<t:label for="crtWorkStart"/>
+            		<t:select t:id="crtWorkStart" value="userCalendar.workStart" model="hours"/>
+            	</p:workStart>
+            	<p:workEnd>
+            		<br/>
+            		<t:label for="crtWorkEnd"/>
+            		<t:select t:id="crtWorkEnd" value="userCalendar.workEnd" model="hours"/>
+            		<br/>
+            	</p:workEnd>
+            </t:beaneditform>
+            <br/>
+        </t:if>
+
+        <a t:type="pageLink" t:page="hotelSchedule" href="#">Cancel</a>
+    </div>
+
+</html>

@@ -9,4 +9,6 @@ public interface UserCalendarDAO {
 	public void updateUserCalendar(UserCalendar userCalendar);
 	public void createUserCalendar(UserCalendar userCalendar);
 	public List<UserCalendar> getUserWorkHoursWeekly(Integer week, Long employeeId);
+	public void deleteUserCalendarById(Long id);
+	public void deleteUserCalendarEmployee(Long calendarId, Long employeeId);
 }
