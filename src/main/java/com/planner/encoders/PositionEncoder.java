@@ -1,13 +1,15 @@
 package com.planner.encoders;
 
+import java.util.List;
+
 import org.apache.tapestry5.ValueEncoder;
 
 import com.planner.dao.EmployeeDAO;
 import com.planner.dao.PositionsDAO;
 import com.planner.entities.Employee;
-import com.planner.entities.Positions;
+import com.planner.entities.Position;
 
-public class PositionEncoder implements ValueEncoder<Positions> {
+public class PositionEncoder implements ValueEncoder<Position> {
 	
 	private PositionsDAO positionsDAO;
 	
@@ -17,13 +19,13 @@ public class PositionEncoder implements ValueEncoder<Positions> {
 	}
 
 	@Override
-	public String toClient(Positions value) {
+	public String toClient(Position value) {
 		return String.valueOf(value.getPositionId());
 	}
 
 	@Override
-	public Positions toValue(String id) {
-		return positionsDAO.getPositions(Long.parseLong(id));
+	public Position toValue(String id) {
+		return positionsDAO.getPosition(Long.parseLong(id));
 	}
 
 }

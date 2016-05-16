@@ -3,7 +3,7 @@
       xmlns:p="tapestry:parameter">
 
 
-	<t:Form>
+	<t:Form t:id="calendarForm">
 		<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 		<br/>
 		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:add="users">

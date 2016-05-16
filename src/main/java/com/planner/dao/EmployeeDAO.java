@@ -12,4 +12,5 @@ public interface EmployeeDAO {
 	public List<Employee> getLobby(Long hotelId);
 	public List<Employee> getSpa(Long hotelId);
 	public void createEmployee(Employee employee);
+	public void updateEmployee(Employee employee);
 }

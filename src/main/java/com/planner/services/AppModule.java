@@ -20,11 +20,13 @@ import com.planner.dao.CalendarDAO;
 import com.planner.dao.EmployeeDAO;
 import com.planner.dao.HotelCalendarDAO;
 import com.planner.dao.HotelDAO;
+import com.planner.dao.PositionsDAO;
 import com.planner.dao.UserCalendarDAO;
 import com.planner.dao.impl.CalendarDAOImpl;
 import com.planner.dao.impl.EmployeeDAOImpl;
 import com.planner.dao.impl.HotelCalendarDAOImpl;
 import com.planner.dao.impl.HotelDAOImpl;
+import com.planner.dao.impl.PositionsDAOImpl;
 import com.planner.dao.impl.UserCalendarDAOImpl;
 
 /**

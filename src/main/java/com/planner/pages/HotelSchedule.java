@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.planner.dao.CalendarDAO;
@@ -30,6 +32,7 @@ public class HotelSchedule {
 	private Calendar calendar;
 	
 	@Property
+	@Persist
 	private Hotel hotel;
 	
 	@Property
@@ -80,14 +83,14 @@ public class HotelSchedule {
 	}
 	
 	public List<HotelCalendar> getHotelCalendars(){
+		System.out.println("CHECK: ->>>>>>>>>> " + hotel);
 		return hotelCalendarDAO.getHotelCalendars(this.week, this.year,hotel.getHotelId());
 	}
 	
 	public List<Calendar> getCalendarsWeek()
 	{
 		return calendarDAO.getCalendarsWeek(this.week, this.year);
-	}
-	
+	}	
 	
 	public void setWeek()
 	{

@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
+
+import com.planner.enums.Sex;
 
 @Entity
 @Table( name = "EMPLOYEE" )
@@ -23,7 +27,7 @@ public class Employee implements Serializable{
 	public Employee(){
 	}
 	
-	public Employee(Long employeeId, String firstName, String lastName, Long age, String sex, String email,
+	public Employee(Long employeeId, String firstName, String lastName, Long age, Sex sex, String email,
 			String description, String fullName, Long hotelId, Long positionId) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
@@ -46,7 +50,9 @@ public class Employee implements Serializable{
 	private String firstName;
 	private String lastName;
 	private Long age;
-	private String sex;
+	
+	@Enumerated(EnumType.STRING)
+	private Sex sex;
 	private String email;
 	private String description;
 	private String fullName;
@@ -83,10 +89,10 @@ public class Employee implements Serializable{
 	public void setAge(Long age) {
 		this.age = age;
 	}
-	public String getSex() {
+	public Sex getSex() {
 		return sex;
 	}
-	public void setSex(String sex) {
+	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
 	public String getDescription() {

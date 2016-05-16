@@ -61,5 +61,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	         e.printStackTrace(); 
 	      }
 	}
+	
+	@Override
+	public void updateEmployee(Employee employee) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 session.update(employee); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
+	}
 
 }

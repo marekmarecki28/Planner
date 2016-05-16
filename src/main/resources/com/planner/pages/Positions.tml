@@ -3,13 +3,25 @@
       xmlns:p="tapestry:parameter">
 
 	<h4>Pokojowa:</h4>
-	<table t:type="grid" t:source="pokojowa" t:row="employee" t:include="firstName,lastName,description"/>
+	<table t:type="grid" t:source="pokojowa" t:row="employee" t:include="firstName,lastName,description" t:add="update">
+		<p:updateCell>
+			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">Aktualizuj</a>
+		</p:updateCell>
+	</table>
 	
 	<h4>Lobby:</h4>
-	<table t:type="grid" t:source="lobby" t:row="employee" t:include="firstName,lastName,description"/>
+	<table t:type="grid" t:source="lobby" t:row="employee" t:include="firstName,lastName,description" t:add="update">
+		<p:updateCell>
+			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">Aktualizuj</a>
+		</p:updateCell>
+	</table>
 	
 	<h4>Spa:</h4>
-	<table t:type="grid" t:source="spa" t:row="employee" t:include="firstName,lastName,description"/>
+	<table t:type="grid" t:source="spa" t:row="employee" t:include="firstName,lastName,description" t:add="update">
+		<p:updateCell>
+			<a t:type="pagelink" t:page="updateEmployee" t:context="employee.employeeId" href="#">Aktualizuj</a>
+		</p:updateCell>
+	</table>
 	
 	<br/>
 	<a t:type="pagelink" t:page="createEmployee" t:context="hotel.hotelId" href="#"><button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowego pracownika</button></a>

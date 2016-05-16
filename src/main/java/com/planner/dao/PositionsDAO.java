@@ -1,9 +1,12 @@
 package com.planner.dao;
 
-import com.planner.entities.Positions;
+import java.util.List;
+
+import com.planner.entities.Position;
 
 public interface PositionsDAO {
 
-	Positions getPositions(long parseLong);
+	List<Position> getPositions();
+	Position getPosition(Long positionId);
 
 }

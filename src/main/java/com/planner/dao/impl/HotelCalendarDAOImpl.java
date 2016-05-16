@@ -29,7 +29,7 @@ public class HotelCalendarDAOImpl implements HotelCalendarDAO {
 	public List<HotelCalendar> getHotelCalendars(Integer week, Integer year, Long hotelId) {
 		List<HotelCalendar> listHotelCalendar = new ArrayList<HotelCalendar>();
 		List<Calendar> listCalendar = calendarDAO.getCalendarsWeek(week, year);
-		
+		System.out.println("OUTTTTTTTTTTTTT2----> ");
 		for (Calendar cal : listCalendar)
 		{
 			HotelCalendar hotelCalendar = new HotelCalendar();

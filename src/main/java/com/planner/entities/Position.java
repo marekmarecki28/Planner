@@ -11,11 +11,11 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 
 @Entity
 @Table( name = "POSITIONS" )
-public class Positions {
+public class Position {
 	
-	public Positions(){}
+	public Position(){}
 	
-	public Positions(Long positionId, String description) {
+	public Position(Long positionId, String description) {
 		this.positionId = positionId;
 		this.description = description;
 	}

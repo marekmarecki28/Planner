@@ -8,8 +8,14 @@
            <t:beaneditform t:id="createEmployeeForm" object="employee" t:exclude="employeeId,hotelId" submitLabel="Zapisz">
            		<p:positionId>
            			<t:label for="crtPos"/>:
-           			<t:select t:id="crtPos" value="employee.positionId" model="positions" t:encoder="positionEncoder"/>
+           			<t:select t:id="crtPos" value="position" model="positionsModel" t:encoder="positionEncoder"/>
+           			<br/>
            		</p:positionId>
+           		<p:sex>
+           			<t:label for="crtSex"/>:
+           			<t:Select t:id="crtSex" t:value="sex"/>
+           			<br/>
+           		</p:sex>
            </t:beaneditform>
            
 

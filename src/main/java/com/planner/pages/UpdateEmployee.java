@@ -1,6 +1,5 @@
 package com.planner.pages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tapestry5.EventContext;
@@ -13,34 +12,20 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
 
 import com.planner.dao.EmployeeDAO;
-import com.planner.dao.HotelDAO;
 import com.planner.dao.PositionsDAO;
 import com.planner.encoders.PositionEncoder;
 import com.planner.entities.Employee;
-import com.planner.entities.Hotel;
 import com.planner.entities.Position;
 import com.planner.enums.Sex;
 
-public class CreateEmployee {
-	
-	@InjectComponent
-    private BeanEditForm createEmployeeForm;
-	
-	@Property
-	private Employee employee;
+public class UpdateEmployee {
 	
 	@Property
 	@Persist
-	private Hotel hotel;
-	
-	@Property
-	Sex sex;
+	private Employee employee;
 	
 	@Property
 	private Position position;
-	
-	@Inject
-	private HotelDAO hotelDAO;
 	
 	@Inject
 	private EmployeeDAO employeeDAO;
@@ -54,58 +39,61 @@ public class CreateEmployee {
 	@Inject
     private SelectModelFactory selectModelFactory;
 	
-	public PositionEncoder getPositionEncoder()
-	{
-		return new PositionEncoder(positionsDAO);
-	}
+	@Property
+	Sex sex;
+	
+	@InjectComponent
+    private BeanEditForm updateEmployeeForm;
 	
 	void onActivate(EventContext context)
 	{
-		
 		if(context.getCount() > 0)
     	{
-    		if(hotel == null)
-        		hotel = hotelDAO.getHotelById(context.get(Long.class,0));
+    		if(employee == null)
+    			employee = employeeDAO.getEmployee(context.get(Long.class,0));
     		
-    		if(hotel != null && hotel.getHotelId() != context.get(Long.class,0))
+    		if(employee != null && employee.getEmployeeId() != context.get(Long.class,0))
     		{
-    			hotel = hotelDAO.getHotelById(context.get(Long.class,0));
+    			employee = employeeDAO.getEmployee(context.get(Long.class,0));
     		}
 
     	}
 	}
 	
-	void onPrepareFromCreateEmployeeForm() throws Exception {
-        employee = new Employee();
+	public PositionEncoder getPositionEncoder()
+	{
+		return new PositionEncoder(positionsDAO);
+	}
+	
+	void setupRender() {
+        employee = employeeDAO.getEmployee(employee.getEmployeeId());
+        position = positionsDAO.getPosition(employee.getPositionId());
     }
 	
-	 void onValidateFromCreateEmployeeForm() 
-	 {
-        if (createEmployeeForm.getHasErrors()) {
+	Object onSuccess() {
+	    return Index.class;
+    }
+	
+	void onPrepareForRender() {
+	 	List<Position> positions = positionsDAO.getPositions();
+        positionsModel = selectModelFactory.create(positions, "description");
+    }
+	
+	 void onValidateFromUpdateEmployeeForm() {
+
+        if (updateEmployeeForm.getHasErrors()) {
             // We get here only if a server-side validator detected an error.
             return;
         }
 
         try {
-        	employee.setHotelId(hotel.getHotelId());
         	employee.setPositionId(position.getPositionId());
-        	employee.setSex(sex);
-            employeeDAO.createEmployee(employee);
+            employeeDAO.updateEmployee(employee);
         } catch (Exception e) {
             // Display the cause. In a real system we would try harder to get a
             // user-friendly message.
-        	createEmployeeForm.recordError(e.getMessage());
+        	updateEmployeeForm.recordError(e.getMessage());
         }
-     }
-	 
-	 Object onSuccess()
-    {
-    	return Positions.class;
     }
-	 
-	 void onPrepareForRender() {
-		 	List<Position> positions = positionsDAO.getPositions();
-	        positionsModel = selectModelFactory.create(positions, "description");
-	    }
 
 }

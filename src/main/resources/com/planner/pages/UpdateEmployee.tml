@@ -1,0 +1,22 @@
+<html t:type="layout" title="UpdateEmployee"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<h1>Aktualizacja nowego pracownika.</h1>
+
+	<div class="eg">
+           <t:beaneditform t:id="updateEmployeeForm" object="employee" t:exclude="employeeId,hotelId" submitLabel="Zapisz">
+           		<p:positionId>
+           			<t:label for="updPos"/>:
+           			<t:select t:id="updPos" value="position" model="positionsModel" t:encoder="positionEncoder"/>
+           			<br/>
+           		</p:positionId>
+           		<p:sex>
+           			<t:label for="updSex"/>:
+           			<t:Select t:id="updSex" t:value="employee.sex"/>
+           			<br/>
+           		</p:sex>
+           </t:beaneditform>
+    </div>
+
+</html>
