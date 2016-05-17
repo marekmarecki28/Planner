@@ -20,18 +20,6 @@
             	</p:workEnd>
             </t:beaneditform>
             <br/>
-<!--             <t:form type="form" t:id="calendarForm" class="well"> -->
-<!--             	<t:label for="updDescription"/> -->
-<!-- 				<input t:type="TextField" t:id="updDescription" value="userCalendar.description" t:validate="maxlength=100" size="10"/> -->
-<!-- 				<br/> -->
-<!-- 				<t:label for="updWorkStart"/> -->
-<!-- 				<t:select t:id="updWorkStart" value="userCalendar.workStart" model="hours"/> -->
-<!-- 				<br/> -->
-<!-- 				<t:label for="updWorkEnd"/> -->
-<!-- 				<t:select t:id="updWorkEnd" value="userCalendar.workEnd" model="hours"/> -->
-<!-- 				<br/> -->
-<!-- 				<input t:type="submit" t:value="Zapisz"/> -->
-<!--             </t:form> -->
         </t:if>
         <t:if negate="true" test="userCalendar">
             <t:form type="form" t:id="createForm" class="well">

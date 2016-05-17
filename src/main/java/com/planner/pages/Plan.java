@@ -5,12 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tapestry5.Block;
 import org.apache.tapestry5.EventContext;
+import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.internal.structure.BlockImpl;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
 
@@ -87,6 +90,10 @@ public class Plan {
 	@InjectComponent("calendarForm")
     private Form form;
 	
+	@Property
+    @Persist(PersistenceConstants.FLASH)
+    private String errorMessage;
+	
 	public List<String> getEmployeeNames()
 	{
 		return employeeDAO.getEmployeeNames();
@@ -132,67 +139,6 @@ public class Plan {
         	setYear();
 		}
     }
-
-//    void onActivate(EventContext context) {
-//    	System.out.println("111111111111111111 ONACTIVATE " + context.getCount());
-//        if (context.getCount() == 1) {
-//			this.hotelId = context.get(Long.class, 0);
-//			System.out.println("111111111111111111 Htl " + context.get(Long.class, 0));
-//        }
-//        else if (context.getCount() > 1) {
-//			this.hotelId = context.get(Long.class, 0);
-//			this.employeeId = context.get(Long.class, 1);
-//			System.out.println("111111111111111111 Hotl " + context.get(Long.class, 0));
-//			System.out.println("111111111111111111 Empl " + context.get(Long.class, 1));
-//        }
-//        
-//        employeeId = employee == null ? null : employee.getEmployeeId();
-//        
-//        if(this.week == null)
-//		{
-//        	setWeek();
-//		}
-//        if(this.year == null)
-//		{
-//        	setYear();
-//		}
-//    }
-	
-//	void onActivate(Long hotelId, Long employeeId)
-//	{
-//		System.out.println("111111111111111111 ONACTIVATE");
-//		this.hotelId = hotelId;
-//		this.employeeId = employeeId;
-//		
-//		employeeId = employee == null ? null : employee.getEmployeeId();
-//      
-//		if(this.week == null)
-//		{
-//			setWeek();
-//		}
-//		if(this.year == null)
-//		{
-//			setYear();
-//		}
-//	}
-//	
-//	void onActivate(Long hotelId, Long employeeId, Long calendarId)
-//	{
-//		System.out.println("33333333333333333333 ONACTIVATE");
-//		this.hotelId = hotelId;
-//		this.employeeId = employeeId;
-//		
-//		if(employeeId == null) employeeId = employee == null ? null : employee.getEmployeeId();
-//      
-//		if(this.week == null)
-//		{
-//			setWeek();
-//		}
-//		if(this.year == null)
-//		{
-//			setYear();
-//		}
-//	}
 	
 	void onPrepareForRender() {
 		List<Employee> employees = getEmployees(hotel.getHotelId());
@@ -317,6 +263,16 @@ public class Plan {
 			out = out + outMn;
 		
 		this.userWorkHoursWeekly = out;
+    }
+	
+	void onDelete(Long calendarId,Long employeeId, Long userCalendarId) {
+
+        try {
+            userCalendarDAO.deleteUserCalendarEmployee(calendarId,employeeId,userCalendarId);
+        }
+        catch (Exception e) {
+            errorMessage = e.getMessage();
+        }
     }
 	
 }

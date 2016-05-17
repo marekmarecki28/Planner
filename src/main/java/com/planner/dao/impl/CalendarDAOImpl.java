@@ -22,14 +22,6 @@ public class CalendarDAOImpl implements CalendarDAO {
 	public CalendarDAOImpl(Session s) {
 		session = s;
 	}
-
-//	@Override
-//	public List<Calendar> getCalendarsWeek(Integer week, Integer year, Long userId) {
-//		String query = "select * from (select c.calendar_id, c.working_date, uc.work_start, uc.work_end, uc.description,c.week,uc.user_id from calendar c left outer join usercalendar uc on c.calendar_id = uc.calendar_id and uc.user_id = " + userId + " order by c.calendar_id asc) d where d.week = " + week + " and ( d.working_date like '%" + year + "%' )";
-//		//List<Calendar> calendars = session.createQuery("from Calendar where week = " + week + " and working_date like '%" + year+ "%' order by calendar_id asc").list();
-//		List<Calendar> calendars = session.createSQLQuery(query).addEntity(Calendar.class).list();
-//		return calendars;
-//	}
 	
 	@Override
 	public List<EmployeeCalendar> getCalendarsWeek(Integer week, Integer year, Long userId) {
@@ -46,7 +38,6 @@ public class CalendarDAOImpl implements CalendarDAO {
 				calendarId = cal.getCalendarId();
 				EmployeeCalendar employeeCalendar = new EmployeeCalendar();
 				employeeCalendar.setCalendarId(cal.getCalendarId());
-				employeeCalendar.setEmployeeId(cal.getUserId());
 				employeeCalendar.setWorkDate(cal.getWorkingDate());
 				
 				List<UserCalendar> listUserCalendar = session.createSQLQuery("select uc.usercalendar_id,uc.calendar_id,uc.user_id,uc.work_start,uc.work_end,uc.description from Usercalendar uc, Employee e where uc.user_id = e.employee_id and uc.calendar_id = " + cal.getCalendarId() + " and e.employee_id = " + cal.getUserId()).addEntity(UserCalendar.class).list();

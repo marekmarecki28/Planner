@@ -81,7 +81,22 @@ public class UserCalendarDAOImpl implements UserCalendarDAO {
 		Transaction tx = null;
 		try{
 	         tx = session.getTransaction();
-			 userCalendar = (UserCalendar) session.createQuery("from Usercalendar where calendar_id = " + calendarId + " and employee_id = " + employeeId).uniqueResult();
+			 userCalendar = (UserCalendar) session.createQuery("from UserCalendar where calendar_id = " + calendarId + " and user_id = " + employeeId).uniqueResult();
+			 session.delete(userCalendar);
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
+	}
+	
+	@Override
+	public void deleteUserCalendarEmployee(Long calendarId, Long employeeId, Long userCalendarId) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 userCalendar = (UserCalendar) session.createQuery("from UserCalendar where calendar_id = " + calendarId + " and user_id = " + employeeId + " and usercalendar_id = " + userCalendarId).uniqueResult();
 			 session.delete(userCalendar);
 	         tx.commit();
 	      }catch (HibernateException e) {

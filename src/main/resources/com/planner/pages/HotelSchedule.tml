@@ -6,19 +6,24 @@
 	<t:Form t:id="calendarForm">
 		<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 		<br/>
-		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:add="users,add">
+		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:exclude="calendarId" t:add="users,add">
 			<p:usersCell>
                <t:grid t:source="hotelCalendar.listUserCalendarDescr" t:row="userCalendarDescr" t:reorder="fullName,workStart,workEnd,description" 
-               t:exclude="calendarId,employeeId" t:add="delete">
-               <p:deleteCell>
-					<a t:type="eventLink" t:event="Delete" t:context="[userCalendarDescr.calendarId,userCalendarDescr.employeeId]"
-                	    t:mixins="Confirm">
-						<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
-			   </p:deleteCell>
-			</t:grid>
+               t:exclude="calendarId,employeeId,userCalendarId" t:add="update,delete" empty="">
+	               <p:updateCell>
+	               		<a t:type="pageLink" t:page="calendarUpdate" t:context="[hotel.hotelId,userCalendarDescr.employeeId,userCalendarDescr.calendarId,userCalendarDescr.userCalendarId]" href="#">
+						<img src="${asset:context:assets/update.png}" alt="Update"/></a>
+	               </p:updateCell>
+	               <p:deleteCell>
+						<a t:type="eventLink" t:event="Delete" t:context="[userCalendarDescr.calendarId,userCalendarDescr.employeeId]"
+	                	    t:mixins="Confirm">
+							<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
+				   </p:deleteCell>
+			   </t:grid>
             </p:usersCell>
             <p:addCell>
-				<a t:type="pagelink" t:page="addEmpToCal" t:context="[hotel.hotelId,hotelCalendar.calendarId]" href="#">Dodaj...</a>
+				<a t:type="pagelink" t:page="addEmpToCal" t:context="[hotel.hotelId,hotelCalendar.calendarId]" href="#">
+				<img src="${asset:context:assets/add.png}" alt="Add"/></a>
             </p:addCell>
         </table>
 		<br/>

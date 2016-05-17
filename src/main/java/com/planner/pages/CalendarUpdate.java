@@ -80,8 +80,8 @@ public class CalendarUpdate {
     	return this.hotelId;
     }
     
-    void onActivate(Long hotelId, Long employeeId, Long calendarId, Long userCalendarId) {
-    	System.out.println("OnActivate");
+    boolean onActivate(Long hotelId, Long employeeId, Long calendarId, Long userCalendarId) {
+    	System.out.println("OnActivate4");
 
     	if(employee == null) employee = employeeDAO.getEmployee(employeeId);
     	if(calendar == null) calendar = calendarDAO.findCalendar(calendarId);
@@ -93,10 +93,29 @@ public class CalendarUpdate {
     	this.employeeId = employee.getEmployeeId();
     	this.calendarId = calendar.getCalendarId();
     	this.hotelId = hotelId;
+    	return true;
+    }
+    
+    void onActivate(Long hotelId, Long employeeId, Long calendarId) {
+    	System.out.println("OnActivate3 " + hotelId + " " + employeeId + " " + calendarId);
+    	
+    	if(employee == null) employee = employeeDAO.getEmployee(employeeId);
+    	if(calendar == null) calendar = calendarDAO.findCalendar(calendarId);
+    	
+    	if(employee != null && employee.getEmployeeId() != employeeId) employee = employeeDAO.getEmployee(employeeId);
+    	if(calendar != null && calendar.getCalendarId() != calendarId) calendar = calendarDAO.findCalendar(calendarId);
+    	
+    	userCalendar = null;
+    	this.employeeId = employee.getEmployeeId();
+    	this.calendarId = calendar.getCalendarId();
+    	this.hotelId = hotelId;
     }
     
     void setupRender() {
-        userCalendar = userCalendarDAO.findUserCalendar(calendarId,employeeId,userCalendarId);
+    	if(userCalendar != null)
+    	{
+    	userCalendar = userCalendarDAO.findUserCalendar(calendarId,employeeId,userCalendarId);
+    	}
     }
     
 
@@ -126,6 +145,7 @@ public class CalendarUpdate {
     }
     
     void onValidateFromCreateForm() {
+    	System.out.println("ONVALIDATE FORM CREWATES");
         if (createForm.getHasErrors()) {
             // We get here only if a server-side validator detected an error.
             return;

@@ -18,15 +18,29 @@
 		<t:Form t:id="calendarForm">
 			<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 				<br/>
-			<table t:type="grid" t:source="calendarsWeek" t:row="employeeCalendar" t:include="workDate" t:add="activities">
+			<table t:type="grid" t:source="calendarsWeek" t:row="employeeCalendar" t:include="workDate" t:add="activities,add">
 				<p:activitiesCell>
 				<table t:type="grid" t:source="employeeCalendar.listUserCalendarDescr" t:row="userCalendarDescr" t:include="workStart,workEnd,description"
-				 t:add="action">
+				 t:add="action,delete" empty="">
 					<p:actionCell>
-		            	<a t:type="pageLink" t:page="calendarUpdate" t:context="[hotel.hotelId,userCalendarDescr.employeeId,userCalendarDescr.calendarId,userCalendarDescr.userCalendarId]" href="#">Update</a>
+		            	<a t:type="pageLink" t:page="calendarUpdate" t:context="[hotel.hotelId,userCalendarDescr.employeeId,userCalendarDescr.calendarId,userCalendarDescr.userCalendarId]" href="#">
+						<img src="${asset:context:assets/update.png}" alt="Update"/></a>
 		        	</p:actionCell>
+		        	<p:deleteCell>
+						<a t:type="eventLink" t:event="Delete" t:context="[userCalendarDescr.calendarId,userCalendarDescr.employeeId,userCalendarDescr.userCalendarId]"
+                	    t:mixins="Confirm">
+						<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
+			   		</p:deleteCell>
+<!-- 			   		<p:empty> -->
+<!-- 			   			<a t:type="pageLink" t:page="calendarUpdate" t:context="[hotel.hotelId,employeeId,employeeCalendar.calendarId]" href="#"> -->
+<!-- 						<img src="${asset:context:assets/update.png}" alt="Update"/></a> -->
+<!-- 			   		</p:empty> -->
 				</table>
 				</p:activitiesCell>
+				<p:addCell>
+					<a t:type="pageLink" t:page="calendarUpdate" t:context="[hotel.hotelId,employeeId,employeeCalendar.calendarId]" href="#">
+					<img src="${asset:context:assets/add.png}" alt="Add"/></a>
+				</p:addCell>
 			</table>
 				<br/>
 			<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>

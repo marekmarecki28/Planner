@@ -9,4 +9,5 @@ public interface HotelDAO {
 	public List<Hotel> getHotels();
 	public List<String> getHotelNames();
 	public Hotel getHotelById(Long hotelId);
+	public void createHotel(Hotel hotel);
 }

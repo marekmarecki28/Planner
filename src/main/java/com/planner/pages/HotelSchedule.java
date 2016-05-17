@@ -130,7 +130,6 @@ public class HotelSchedule {
 	}
 	
 	void onDelete(Long calendarId,Long employeeId) {
-
         try {
             userCalendarDAO.deleteUserCalendarEmployee(calendarId,employeeId);
         }

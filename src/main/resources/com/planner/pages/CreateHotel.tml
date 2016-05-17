@@ -1,0 +1,11 @@
+<html t:type="layout" title="planner Index"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter"  >
+
+	<h1>Tworzenie nowego hotelu</h1>
+
+	<div class="eg">
+           <t:beaneditform t:id="createHotelForm" object="hotel" t:exclude="hotelId" submitLabel="Zapisz"/>
+    </div>
+
+</html>

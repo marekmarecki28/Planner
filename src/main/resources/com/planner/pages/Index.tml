@@ -13,5 +13,5 @@
 			<a t:type="pagelink" t:page="hotelSchedule" t:context="hotel.hotelId" href="#">Grafik pracy</a>
 		</p:scheduleCell>
 	</table>
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowy hotel</button>
+	<a t:type="pagelink" t:page="createHotel" href="#"><button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowy hotel</button></a>
 </html>

@@ -2,7 +2,9 @@ package com.planner.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
 import com.planner.dao.HotelDAO;
@@ -32,5 +34,19 @@ public class HotelDAOImpl implements HotelDAO{
 	public Hotel getHotelById(Long hotelId) {
 		Hotel hotel = (Hotel) session.createQuery("from Hotel where hotel_id = " + hotelId).uniqueResult();
 		return hotel;
+	}
+
+	@Override
+	public void createHotel(Hotel hotel) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 session.save(hotel); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
 	}
 }
