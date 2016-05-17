@@ -4,15 +4,19 @@ public class UserCalendarDescr {
 	
 	public UserCalendarDescr(){}
 	
-	public UserCalendarDescr(Long calendarId, Long employeeId, String description, Long userId, String workStart,
-			String workEnd) {
+	
+	public UserCalendarDescr(Long userCalendarId, Long calendarId, Long employeeId, String fullName, String description,
+			String workStart, String workEnd) {
+		this.userCalendarId = userCalendarId;
 		this.calendarId = calendarId;
 		this.employeeId = employeeId;
+		this.fullName = fullName;
 		this.description = description;
 		this.workStart = workStart;
 		this.workEnd = workEnd;
 	}
-	
+
+	private Long userCalendarId;
 	private Long calendarId;
 	private Long employeeId;
 	private String fullName;
@@ -20,6 +24,12 @@ public class UserCalendarDescr {
 	private String workStart;
 	private String workEnd;
 	
+	public Long getUserCalendarId() {
+		return userCalendarId;
+	}
+	public void setUserCalendarId(Long userCalendarId) {
+		this.userCalendarId = userCalendarId;
+	}
 	public Long getCalendarId() {
 		return calendarId;
 	}

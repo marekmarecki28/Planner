@@ -5,7 +5,7 @@ import java.util.List;
 import com.planner.entities.UserCalendar;
 
 public interface UserCalendarDAO {
-	public UserCalendar findUserCalendar(Long calendarId, Long employeeId);
+	public UserCalendar findUserCalendar(Long calendarId, Long employeeId, Long userCalendarId);
 	public void updateUserCalendar(UserCalendar userCalendar);
 	public void createUserCalendar(UserCalendar userCalendar);
 	public List<UserCalendar> getUserWorkHoursWeekly(Integer week, Long employeeId);

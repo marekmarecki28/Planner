@@ -21,8 +21,10 @@ import com.planner.dao.UserCalendarDAO;
 import com.planner.encoders.EmployeeEncoder;
 import com.planner.entities.Calendar;
 import com.planner.entities.Employee;
+import com.planner.entities.EmployeeCalendar;
 import com.planner.entities.Hotel;
 import com.planner.entities.UserCalendar;
+import com.planner.entities.UserCalendarDescr;
 
 public class Plan {
 	
@@ -45,6 +47,12 @@ public class Plan {
 	
 	@Property
 	private Calendar calendar;
+	
+	@Property
+	private EmployeeCalendar employeeCalendar;
+	
+	@Property
+	private UserCalendarDescr userCalendarDescr;
 	
 	@Property
 	private String userWorkHoursWeekly;
@@ -235,7 +243,12 @@ public class Plan {
 			return false;
 	}
 	
-	public List<Calendar> getCalendarsWeek()
+//	public List<Calendar> getCalendarsWeek()
+//	{
+//		return calendarDAO.getCalendarsWeek(this.week, this.year, employeeId);
+//	}
+	
+	public List<EmployeeCalendar> getCalendarsWeek()
 	{
 		return calendarDAO.getCalendarsWeek(this.week, this.year, employeeId);
 	}

@@ -21,8 +21,8 @@ public class UserCalendarDAOImpl implements UserCalendarDAO {
 	}
 	
 	@Override
-	public UserCalendar findUserCalendar(Long calendarId, Long employeeId) {
-		UserCalendar calendar = (UserCalendar) session.createQuery("from UserCalendar where calendar_id = " + calendarId + " and user_id = " + employeeId ).uniqueResult();
+	public UserCalendar findUserCalendar(Long calendarId, Long employeeId, Long userCalendarId) {
+		UserCalendar calendar = (UserCalendar) session.createQuery("from UserCalendar where calendar_id = " + calendarId + " and user_id = " + employeeId + " and usercalendar_id = " + userCalendarId).uniqueResult();
 		return calendar;
 	}
 

@@ -80,7 +80,7 @@ public class CalendarUpdate {
     	return this.hotelId;
     }
     
-    void onActivate(Long hotelId, Long employeeId, Long calendarId) {
+    void onActivate(Long hotelId, Long employeeId, Long calendarId, Long userCalendarId) {
     	System.out.println("OnActivate");
 
     	if(employee == null) employee = employeeDAO.getEmployee(employeeId);
@@ -89,13 +89,14 @@ public class CalendarUpdate {
     	if(employee != null && employee.getEmployeeId() != employeeId) employee = employeeDAO.getEmployee(employeeId);
     	if(calendar != null && calendar.getCalendarId() != calendarId) calendar = calendarDAO.findCalendar(calendarId);
     	
+    	this.userCalendarId = userCalendarId;
     	this.employeeId = employee.getEmployeeId();
     	this.calendarId = calendar.getCalendarId();
     	this.hotelId = hotelId;
     }
     
     void setupRender() {
-        userCalendar = userCalendarDAO.findUserCalendar(calendarId,employeeId);
+        userCalendar = userCalendarDAO.findUserCalendar(calendarId,employeeId,userCalendarId);
     }
     
 
@@ -146,7 +147,7 @@ public class CalendarUpdate {
     }
     
     void onSuccessFromCreateForm() {
-    	userCalendarId = userCalendar.getCalendarId();
+    	userCalendarId = userCalendar.getUserCalendarId();
     }
       
     
