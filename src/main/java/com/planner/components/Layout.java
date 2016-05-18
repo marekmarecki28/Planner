@@ -1,5 +1,7 @@
 package com.planner.components;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.*;
@@ -46,5 +48,11 @@ public class Layout
   {
     return new String[]{};
   }
-
+  
+  public String getUserName()
+  {
+	  Subject currentUser = SecurityUtils.getSubject();
+	  System.out.println("currentUser= " + currentUser.getPrincipals());
+	  return (String) currentUser.getPrincipal().toString();
+  }
 }

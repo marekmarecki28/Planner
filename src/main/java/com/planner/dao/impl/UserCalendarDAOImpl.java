@@ -7,8 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.planner.dao.UserCalendarDAO;
-import com.planner.entities.Calendar;
-import com.planner.entities.Employee;
 import com.planner.entities.UserCalendar;
 
 public class UserCalendarDAOImpl implements UserCalendarDAO {

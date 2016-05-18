@@ -84,6 +84,21 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         	<artifactId>tapestry-hibernate</artifactId>
         	<version>5.4.0</version>
         </dependency>
+        <dependency>
+        	<groupId>org.apache.shiro</groupId>
+        	<artifactId>shiro-core</artifactId>
+        	<version>1.2.4</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.shiro</groupId>
+        	<artifactId>shiro-web</artifactId>
+        	<version>1.2.4</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.tynamo</groupId>
+        	<artifactId>tapestry-security</artifactId>
+        	<version>0.6.2</version>
+        </dependency>
         </dependencies>
     <build>
         <finalName>planner</finalName>
