@@ -25,18 +25,28 @@ public class Calendar implements Serializable{
 	@Inject
 	public Calendar(){}
 
-	public Calendar(Date workingDate, String description, Long userId) {
+	
+	
+	public Calendar(Long calendarId, Date workingDate, String day, String description, Long userId, String workStart,
+			String workEnd) {
+		this.calendarId = calendarId;
 		this.workingDate = workingDate;
+		this.day = day;
 		this.description = description;
 		this.userId = userId;
+		this.workStart = workStart;
+		this.workEnd = workEnd;
 	}
-	
+
+
+
 	@Id
 	@NonVisual
 	@Column(name = "CALENDAR_ID")
 	private Long calendarId;
 	@Column(name = "WORKING_DATE")
 	private Date workingDate;
+	private String day;
 	private String description;
 	@Column(name = "USER_ID")
 	private Long userId;
@@ -81,5 +91,11 @@ public class Calendar implements Serializable{
 	}
 	public void setWorkEnd(String workEnd) {
 		this.workEnd = workEnd;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
 	}
 }

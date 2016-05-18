@@ -7,15 +7,17 @@ public class EmployeeCalendar {
 	
 	public EmployeeCalendar(){}
 	
-	public EmployeeCalendar(Date workDate, Long calendarId, Long employeeId, List<UserCalendarDescr> listUserCalendarDescr) {
-		super();
+	public EmployeeCalendar(Date workDate, String day, Long calendarId, Long employeeId,
+			List<UserCalendarDescr> listUserCalendarDescr) {
 		this.workDate = workDate;
+		this.day = day;
 		this.calendarId = calendarId;
 		this.employeeId = employeeId;
 		this.listUserCalendarDescr = listUserCalendarDescr;
 	}
-	
+
 	private Date workDate;
+	private String day;
 	private Long calendarId;
 	private Long employeeId;
 	private List<UserCalendarDescr> listUserCalendarDescr;
@@ -43,6 +45,12 @@ public class EmployeeCalendar {
 	}
 	public void setListUserCalendarDescr(List<UserCalendarDescr> listUserCalendarDescr) {
 		this.listUserCalendarDescr = listUserCalendarDescr;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
 	}
 
 }

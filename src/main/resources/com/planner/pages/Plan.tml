@@ -13,12 +13,15 @@
 	<br/>
 	
 	<t:If t:test="submitted">
-		<t:BeanDisplay t:object="employee"/>
+		<t:BeanDisplay t:object="employee" t:exclude="hotelId,positionId,fullName"/>
+		<div class="well dl-horizontal">
+		<b>${userWorkHoursWeekly}</b>
+		</div>
 		<br/>
 		<t:Form t:id="calendarForm">
 			<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 				<br/>
-			<table t:type="grid" t:source="calendarsWeek" t:row="employeeCalendar" t:include="workDate" t:add="activities,add">
+			<table t:type="grid" t:source="calendarsWeek" t:row="employeeCalendar" t:include="workDate,day" t:add="activities,add">
 				<p:activitiesCell>
 				<table t:type="grid" t:source="employeeCalendar.listUserCalendarDescr" t:row="userCalendarDescr" t:include="workStart,workEnd,description"
 				 t:add="action,delete" empty="">
@@ -45,7 +48,6 @@
 				<br/>
 			<input class="btn btn-lg btn-primary btn-block" t:id="down" t:type="Submit" value="Następny tydzień"/>
 		</t:Form>
-		${userWorkHoursWeekly}
 	</t:If>
 
 </html>

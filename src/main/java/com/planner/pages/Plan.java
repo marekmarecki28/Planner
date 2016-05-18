@@ -256,7 +256,7 @@ public class Plan {
 		}
 		
 		
-		String out = "Pracownik przepracowaÅ‚: " + this.hourDiff + " godzin";
+		String out = "Pracownik przepracowa³: " + this.hourDiff + " godzin";
 		String outMn = " i " + this.minuteDiff + " minut";
 		
 		if(this.minuteDiff > 0)

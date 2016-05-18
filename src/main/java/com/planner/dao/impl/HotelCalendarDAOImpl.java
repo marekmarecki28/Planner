@@ -33,6 +33,7 @@ public class HotelCalendarDAOImpl implements HotelCalendarDAO {
 		{
 			HotelCalendar hotelCalendar = new HotelCalendar();
 			hotelCalendar.setWorkDate(cal.getWorkingDate());
+			hotelCalendar.setDay(cal.getDay());
 			hotelCalendar.setCalendarId(cal.getCalendarId());
 			List<UserCalendar> listUserCalendar = session.createSQLQuery("select uc.usercalendar_id,uc.calendar_id,uc.user_id,uc.work_start,uc.work_end,uc.description from Usercalendar uc, Employee e where uc.user_id = e.employee_id and uc.calendar_id = " + cal.getCalendarId() + " and e.hotel_id = " + hotelId).addEntity(UserCalendar.class).list();
 			
