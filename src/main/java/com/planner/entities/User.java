@@ -43,24 +43,23 @@ public class User {
 	@Column
 	private String firstName;
 	
-	@Validate("required")
 	@Column
 	private String lastName;
-	
-	@Validate("required")
+
 	@Column
 	private int age;
 
-	@Validate("required")
 	@Column
 	private Sex sex;
 	
+	@Validate("required")
 	@Column
     private String email;
 	
 	@Column
 	private String username;
    
+	@Validate("required")
     @Column
     private String password;
    

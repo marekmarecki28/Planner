@@ -1,5 +1,6 @@
 package com.planner.auth;
 
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -57,11 +58,13 @@ public class MyCustomRealm extends JdbcRealm{
 					username, user.getPassword(), user.getSalt());
 			
 			return info;
-		}catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			System.out.println("Exceptption=  " + e);
 			throw new AuthenticationException();
-		} finally {
+		} 
+		finally {
 			session.getTransaction().commit();
 			if (session.isOpen()) session.close();
 		}

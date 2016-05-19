@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
@@ -11,6 +12,7 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Marker;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.*;
@@ -18,6 +20,10 @@ import org.apache.tapestry5.services.javascript.JavaScriptStack;
 import org.apache.tapestry5.services.javascript.StackExtension;
 import org.apache.tapestry5.services.javascript.StackExtensionType;
 import org.slf4j.Logger;
+import org.tynamo.security.Security;
+import org.tynamo.security.SecuritySymbols;
+import org.tynamo.security.services.SecurityFilterChainFactory;
+import org.tynamo.security.services.impl.SecurityFilterChain;
 
 import com.planner.auth.MyCustomRealm;
 import com.planner.dao.CalendarDAO;
@@ -26,12 +32,14 @@ import com.planner.dao.HotelCalendarDAO;
 import com.planner.dao.HotelDAO;
 import com.planner.dao.PositionsDAO;
 import com.planner.dao.UserCalendarDAO;
+import com.planner.dao.UserDAO;
 import com.planner.dao.impl.CalendarDAOImpl;
 import com.planner.dao.impl.EmployeeDAOImpl;
 import com.planner.dao.impl.HotelCalendarDAOImpl;
 import com.planner.dao.impl.HotelDAOImpl;
 import com.planner.dao.impl.PositionsDAOImpl;
 import com.planner.dao.impl.UserCalendarDAOImpl;
+import com.planner.dao.impl.UserDAOImpl;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
@@ -48,6 +56,7 @@ public class AppModule
     	binder.bind(UserCalendarDAO.class, UserCalendarDAOImpl.class);
     	binder.bind(HotelCalendarDAO.class, HotelCalendarDAOImpl.class);
     	binder.bind(PositionsDAO.class, PositionsDAOImpl.class);
+    	binder.bind(UserDAO.class, UserDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation
@@ -65,6 +74,17 @@ public class AppModule
     	realm.setCredentialsMatcher(hm);
     	configuration.add(realm);
     }
+    
+	@Contribute(HttpServletRequestFilter.class)
+	@Marker(Security.class)
+	public static void setupSecurity(Configuration<SecurityFilterChain> configuration,
+			SecurityFilterChainFactory factory, WebSecurityManager securityManager) {
+
+		configuration.add(factory.createChain("/positions/**").add(factory.authc()).build());
+		configuration.add(factory.createChain("/plan/**").add(factory.authc()).build());
+		configuration.add(factory.createChain("/createhotel/**").add(factory.authc()).build());
+		configuration.add(factory.createChain("/hotelschedule/**").add(factory.authc()).build());
+	}
 
     public static void contributeFactoryDefaults(
         MappedConfiguration<String, Object> configuration)
@@ -94,6 +114,8 @@ public class AppModule
               // You should change the passphrase immediately; the HMAC passphrase is used to secure
         // the hidden field data stored in forms to encrypt and digitally sign client-side data.
         configuration.add(SymbolConstants.HMAC_PASSPHRASE, "change this immediately");
+        
+        configuration.add(SecuritySymbols.LOGIN_URL, "/signin");
     }
 
 	/**

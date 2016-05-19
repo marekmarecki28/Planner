@@ -2,6 +2,13 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
       
-	<t:BeanEditForm t:id="mybeaneditor" submitlabel="message:submit-label" t:object="user"/>
+	<t:BeanEditForm t:id="mybeaneditor" submitlabel="message:submit-label" t:object="user" 
+					t:reorder="email,password,firstName,lastName,age" t:exclude="salt,userName">
+	<p:email>
+		<t:label for="email"/>
+                <t:textfield t:id="email" value="user.email"/>
+        <br/>
+	</p:email>
+	</t:BeanEditForm>
       
 </html>

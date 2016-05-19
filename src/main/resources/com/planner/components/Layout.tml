@@ -33,16 +33,11 @@
                     </t:any>
                 </t:loop>
             </ul>
-            <span class="navbar-right">
-                <li>
-                    <t:pagelink page="login" class="btn btn-default navbar-btn">Zaloguj</t:pagelink>
-               	</li>
-            </span>
             
             <span class="navbar-right">
                 
-                	<t:security.User><font color="#B6BDBF">Hello, ${username}   </font><t:pagelink page="logout" class="btn btn-default navbar-btn">Log out</t:pagelink></t:security.User>
-           			<t:security.Guest><font color="#B6BDBF">Hello, guest! If you want to see more ... </font><t:pagelink page="signin" class="btn btn-default navbar-btn">Sign in</t:pagelink></t:security.Guest>
+                	<t:security.User><font color="#B6BDBF">Witaj, ${username}   </font><t:pagelink page="logout" class="btn btn-default navbar-btn">Log out</t:pagelink></t:security.User>
+           			<t:security.Guest><font color="#B6BDBF">Witaj, gościu! </font><t:pagelink page="signin" class="btn btn-default navbar-btn">Sign in</t:pagelink></t:security.Guest>
 
             </span>
 

@@ -1,6 +1,7 @@
 package com.planner.pages;
 
 
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -11,14 +12,18 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.BeanEditForm;
+import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Session;
 import org.tynamo.security.services.SecurityService;
 
+import com.planner.dao.UserDAO;
 import com.planner.entities.User;
 
 
@@ -35,10 +40,19 @@ public class NewAccount {
     private Login login;
     
     @Inject
+    private UserDAO userDAO;
+    
+    @Inject
 	private SecurityService securityService;
     
     @Inject
 	private AlertManager alertManager;
+    
+    @InjectComponent
+    private BeanEditForm myBeanEditor;
+    
+    @InjectComponent("email")
+    private TextField emailField;
 
 	@CommitAfter
     Object onSuccess()
@@ -52,6 +66,20 @@ public class NewAccount {
     void onPrepareFromMyBeanEditor() {
         user = new User();
       }
+    
+    void onValidateFromMyBeanEditor()
+    {
+    	System.out.println("onValidateFromMyBeanEditior");
+    	System.out.println("User: " + user.getFirstName());
+    	
+    	if(user.getEmail() != null)
+    	{
+    		User checkUser = userDAO.getUserByEmail(user.getEmail());
+    		if(checkUser != null){
+    			myBeanEditor.recordError(emailField,"Ten email istnieje już w naszej bazie.");
+    		}
+    	}
+    }
     
     public void registrate(String email, String plainTextPassword) {
     	  
