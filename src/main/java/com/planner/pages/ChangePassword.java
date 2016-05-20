@@ -63,7 +63,7 @@ public class ChangePassword {
 			System.out.println("WYNIK POROWNANIA: " + successfulAuthentication);
 			if(!successfulAuthentication)
 			{
-				changePassword.recordError(oldPasswordField,"Błędne hasło");
+				changePassword.recordError(oldPasswordField,"Bledne haslo");
 			}
 			else 
 			{
@@ -74,7 +74,7 @@ public class ChangePassword {
 				}
 				else
 				{
-					changePassword.recordError(newPassword1Field,"Podane hasło nie zgadza się");
+					changePassword.recordError(newPassword1Field,"Podane haslo nie zgadza sie");
 				}
 			}
 		}
