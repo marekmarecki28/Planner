@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.tapestry5.Block;
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.SelectModel;
@@ -13,7 +12,6 @@ import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.internal.structure.BlockImpl;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
 
@@ -256,7 +254,7 @@ public class Plan {
 		}
 		
 		
-		String out = "Pracownik przepracowa³: " + this.hourDiff + " godzin";
+		String out = "Pracownik przepracowaï¿½: " + this.hourDiff + " godzin";
 		String outMn = " i " + this.minuteDiff + " minut";
 		
 		if(this.minuteDiff > 0)

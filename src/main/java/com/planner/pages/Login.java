@@ -7,14 +7,8 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.alerts.AlertManager;
-import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.corelib.components.PasswordField;
-import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.slf4j.Logger;
 import org.tynamo.security.services.SecurityService;
 
 public class Login

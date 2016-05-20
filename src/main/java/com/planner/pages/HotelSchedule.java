@@ -8,21 +8,17 @@ import java.util.List;
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.annotations.Import;
-import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.planner.dao.CalendarDAO;
-import com.planner.dao.EmployeeDAO;
 import com.planner.dao.HotelCalendarDAO;
 import com.planner.dao.HotelDAO;
 import com.planner.dao.UserCalendarDAO;
 import com.planner.entities.Calendar;
 import com.planner.entities.Hotel;
 import com.planner.entities.HotelCalendar;
-import com.planner.entities.UserCalendar;
 import com.planner.entities.UserCalendarDescr;
 
 public class HotelSchedule {

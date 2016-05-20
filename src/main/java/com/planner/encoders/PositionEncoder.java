@@ -1,12 +1,8 @@
 package com.planner.encoders;
 
-import java.util.List;
-
 import org.apache.tapestry5.ValueEncoder;
 
-import com.planner.dao.EmployeeDAO;
 import com.planner.dao.PositionsDAO;
-import com.planner.entities.Employee;
 import com.planner.entities.Position;
 
 public class PositionEncoder implements ValueEncoder<Position> {

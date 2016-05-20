@@ -2,9 +2,7 @@ package com.planner.pages;
 
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
-import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import com.planner.dao.HotelDAO;
