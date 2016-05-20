@@ -1,0 +1,11 @@
+<html t:type="layout" title="start com.example"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+<h2>Dane użytkownika  </h2>
+	<t:BeanDisplay t:object="user" t:exclude="password,salt,sex,username"/>
+	
+	<a t:type="pagelink" t:page="editUser" href="#"><button class="btn btn-lg btn-primary btn-block" type="submit">Edytuj użytkownika</button></a>
+	<br/>
+	<a t:type="pagelink" t:page="changePassword" href="#"><button class="btn btn-lg btn-primary btn-block" type="submit">Zmień hasło</button></a>
+</html>

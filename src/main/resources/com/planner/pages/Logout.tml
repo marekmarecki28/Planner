@@ -3,7 +3,7 @@
       xmlns:p="tapestry:parameter">
 
 <div class="row">
-	<p>You have successfully logged out!</p>
+	<p><b>Zostałeś pomyślnie wylogowany</b></p>
 </div>
 
 </html>

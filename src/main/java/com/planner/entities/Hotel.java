@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
+import org.apache.tapestry5.beaneditor.Validate;
 
 @Entity
 @Table( name = "HOTEL" )
@@ -36,8 +37,10 @@ public class Hotel implements Serializable{
 	private Long hotelId;
 	
 	@Column(name = "HOTEL_NAME")
+	@Validate("required")
 	private String hotelName;
 	
+	@Validate("required")
 	private String description;
 
 	public Long getHotelId() {

@@ -6,7 +6,7 @@
 					t:reorder="email,password,firstName,lastName,age" t:exclude="salt,userName">
 	<p:email>
 		<t:label for="email"/>
-                <t:textfield t:id="email" value="user.email"/>
+                <t:textfield t:id="email" value="user.email" validate="email"/>
         <br/>
 	</p:email>
 	</t:BeanEditForm>

@@ -1,0 +1,8 @@
+<html t:type="layout" title="start com.example"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+<h2>Edycja użytkownika  </h2>
+	<t:BeanEditForm t:id="editForm" t:object="user" submitlabel="message:submit-label" t:exclude="email,password,salt,sex,username"
+	cancel="true"/>
+</html>

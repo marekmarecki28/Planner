@@ -6,5 +6,6 @@ public interface UserDAO {
 
 	User getUserByEmail(String username);
 	Long getUserId(String email);
+	void updateUser(User user);
 
 }
