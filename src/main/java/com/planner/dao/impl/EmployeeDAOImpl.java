@@ -36,17 +36,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 	@Override
 	public List<Employee> getPokojowa(Long hotelId) {
-		List<Employee> employees = session.createQuery("from Employee where position_id = 0 and hotel_id = " + hotelId).list();
-		return employees;
-	}
-	@Override
-	public List<Employee> getLobby(Long hotelId) {
 		List<Employee> employees = session.createQuery("from Employee where position_id = 1 and hotel_id = " + hotelId).list();
 		return employees;
 	}
 	@Override
-	public List<Employee> getSpa(Long hotelId) {
+	public List<Employee> getLobby(Long hotelId) {
 		List<Employee> employees = session.createQuery("from Employee where position_id = 2 and hotel_id = " + hotelId).list();
+		return employees;
+	}
+	@Override
+	public List<Employee> getSpa(Long hotelId) {
+		List<Employee> employees = session.createQuery("from Employee where position_id = 3 and hotel_id = " + hotelId).list();
 		return employees;
 	}
 	@Override

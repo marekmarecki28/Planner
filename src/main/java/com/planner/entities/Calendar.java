@@ -25,15 +25,12 @@ public class Calendar implements Serializable{
 
 	
 	
-	public Calendar(Long calendarId, Date workingDate, String day, String description, Long userId, String workStart,
-			String workEnd) {
+	public Calendar(Long calendarId, Date workingDate, String day, String description, Long userId) {
 		this.calendarId = calendarId;
 		this.workingDate = workingDate;
 		this.day = day;
 		this.description = description;
 		this.userId = userId;
-		this.workStart = workStart;
-		this.workEnd = workEnd;
 	}
 
 
@@ -48,10 +45,6 @@ public class Calendar implements Serializable{
 	private String description;
 	@Column(name = "USER_ID")
 	private Long userId;
-	@Column(name = "WORK_START")
-	private String workStart;
-	@Column(name = "WORK_END")
-	private String workEnd;
 	
 	public Date getWorkingDate() {
 		return workingDate;
@@ -77,18 +70,6 @@ public class Calendar implements Serializable{
 	}
 	public void setCalendarId(Long calendarId) {
 		this.calendarId = calendarId;
-	}
-	public String getWorkStart() {
-		return workStart;
-	}
-	public void setWorkStart(String workStart) {
-		this.workStart = workStart;
-	}
-	public String getWorkEnd() {
-		return workEnd;
-	}
-	public void setWorkEnd(String workEnd) {
-		this.workEnd = workEnd;
 	}
 	public String getDay() {
 		return day;

@@ -35,7 +35,7 @@ public class HotelCalendarDAOImpl implements HotelCalendarDAO {
 			hotelCalendar.setWorkDate(cal.getWorkingDate());
 			hotelCalendar.setDay(cal.getDay());
 			hotelCalendar.setCalendarId(cal.getCalendarId());
-			List<UserCalendar> listUserCalendar = session.createSQLQuery("select uc.usercalendar_id,uc.calendar_id,uc.user_id,uc.work_start,uc.work_end,uc.description from Usercalendar uc, Employee e where uc.user_id = e.employee_id and uc.calendar_id = " + cal.getCalendarId() + " and e.hotel_id = " + hotelId).addEntity(UserCalendar.class).list();
+			List<UserCalendar> listUserCalendar = session.createSQLQuery("select uc.usercalendar_id,uc.calendar_id,uc.user_id,uc.work_start,uc.work_end,uc.description from USERCALENDAR uc, EMPLOYEE e where uc.user_id = e.employee_id and uc.calendar_id = " + cal.getCalendarId() + " and e.hotel_id = " + hotelId).addEntity(UserCalendar.class).list();
 			
 			List<UserCalendarDescr> listCalendarDescr = new ArrayList<UserCalendarDescr>();
 			
@@ -44,6 +44,7 @@ public class HotelCalendarDAOImpl implements HotelCalendarDAO {
 				Employee employee = (Employee) session.createQuery("from Employee where employee_id = " + userCal.getUserId()).uniqueResult();
 				
 				UserCalendarDescr userCalendarDescr = new UserCalendarDescr();
+				userCalendarDescr.setUserCalendarId(userCal.getUserCalendarId());
 				userCalendarDescr.setCalendarId(cal.getCalendarId());
 				userCalendarDescr.setDescription(userCal.getDescription());
 				userCalendarDescr.setEmployeeId(userCal.getUserId());

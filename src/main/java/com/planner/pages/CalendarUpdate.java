@@ -105,21 +105,24 @@ public class CalendarUpdate {
     	if(employee != null && employee.getEmployeeId() != employeeId) employee = employeeDAO.getEmployee(employeeId);
     	if(calendar != null && calendar.getCalendarId() != calendarId) calendar = calendarDAO.findCalendar(calendarId);
     	
-    	userCalendar = null;
+    	this.userCalendarId = null;
     	this.employeeId = employee.getEmployeeId();
     	this.calendarId = calendar.getCalendarId();
     	this.hotelId = hotelId;
     }
     
     void setupRender() {
-    	if(userCalendar != null)
+    	System.out.println("setupRender " + userCalendar);
+    	if(userCalendarId != null)
     	{
+    		System.out.println("setupRender");
     	userCalendar = userCalendarDAO.findUserCalendar(calendarId,employeeId,userCalendarId);
     	}
     }
     
 
     void onValidateFromCalendarForm() {
+    	System.out.println("onValidateFromCalendarForm");
         if (calendarForm.getHasErrors()) {
             // We get here only if a server-side validator detected an error.
             return;

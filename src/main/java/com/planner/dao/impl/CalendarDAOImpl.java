@@ -26,7 +26,7 @@ public class CalendarDAOImpl implements CalendarDAO {
 	@Override
 	public List<EmployeeCalendar> getCalendarsWeek(Integer week, Integer year, Long userId) {
 		Long calendarId = new Long(-1);
-		String query = "select * from (select c.calendar_id, c.working_date,c.day, uc.work_start, uc.work_end, uc.description,c.week,uc.user_id from calendar c left outer join usercalendar uc on c.calendar_id = uc.calendar_id and uc.user_id = " + userId + " order by c.calendar_id asc) d where d.week = " + week + " and ( d.working_date like '%" + year + "%' )";
+		String query = "select * from (select c.calendar_id, c.working_date,c.day, uc.work_start, uc.work_end, uc.description,c.week,uc.user_id from CALENDAR c left outer join USERCALENDAR uc on c.calendar_id = uc.calendar_id and uc.user_id = " + userId + " order by c.calendar_id asc) d where d.week = " + week + " and ( d.working_date like '%" + year + "%' )";
 		List<Calendar> calendars = session.createSQLQuery(query).addEntity(Calendar.class).list();
 		
 		List<EmployeeCalendar> listEmployeeCalendar = new ArrayList<EmployeeCalendar>();
@@ -41,7 +41,7 @@ public class CalendarDAOImpl implements CalendarDAO {
 				employeeCalendar.setWorkDate(cal.getWorkingDate());
 				employeeCalendar.setDay(cal.getDay());
 				
-				List<UserCalendar> listUserCalendar = session.createSQLQuery("select uc.usercalendar_id,uc.calendar_id,uc.user_id,uc.work_start,uc.work_end,uc.description from Usercalendar uc, Employee e where uc.user_id = e.employee_id and uc.calendar_id = " + cal.getCalendarId() + " and e.employee_id = " + cal.getUserId()).addEntity(UserCalendar.class).list();
+				List<UserCalendar> listUserCalendar = session.createSQLQuery("select uc.usercalendar_id,uc.calendar_id,uc.user_id,uc.work_start,uc.work_end,uc.description from USERCALENDAR uc, EMPLOYEE e where uc.user_id = e.employee_id and uc.calendar_id = " + cal.getCalendarId() + " and e.employee_id = " + cal.getUserId()).addEntity(UserCalendar.class).list();
 				
 				List<UserCalendarDescr> listUserCalendarDescr = new ArrayList<UserCalendarDescr>();
 				
@@ -71,7 +71,7 @@ public class CalendarDAOImpl implements CalendarDAO {
 
 	public Integer getWeekOfDate(String date)
 	{
-		Integer week = (Integer) session.createQuery("select week from Calendar where working_date = to_date('" + date +"','YYYY-MM-DD')").uniqueResult();
+		Integer week = (Integer) session.createQuery("select week from Calendar where working_date = str_to_date('" + date +"','%Y-%m-%d')").uniqueResult();
 		return week;
 	}
 
