@@ -10,4 +10,5 @@ public interface HotelDAO {
 	public List<String> getHotelNames();
 	public Hotel getHotelById(Long hotelId);
 	public void createHotel(Hotel hotel);
+	public void deleteHotel(Long id);
 }

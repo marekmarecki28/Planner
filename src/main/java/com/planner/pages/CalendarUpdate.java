@@ -177,7 +177,7 @@ public class CalendarUpdate {
     Object onSuccess()
     {
     	System.out.println("END onSuccess!!!");
-    	return Plan.class;
+    	return HotelSchedule.class;
     }
     
     public List<String> getHours() {

@@ -15,7 +15,7 @@
 						<img src="${asset:context:assets/update.png}" alt="Update"/></a>
 	               </p:updateCell>
 	               <p:deleteCell>
-						<a t:type="eventLink" t:event="Delete" t:context="[userCalendarDescr.calendarId,userCalendarDescr.employeeId]"
+						<a t:type="eventLink" t:event="Delete" t:context="[userCalendarDescr.calendarId,userCalendarDescr.employeeId,userCalendarDescr.userCalendarId]"
 	                	    t:mixins="Confirm">
 							<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
 				   </p:deleteCell>

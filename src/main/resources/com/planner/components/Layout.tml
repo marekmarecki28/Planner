@@ -37,7 +37,6 @@
             <span class="navbar-right">
                 
                 	<t:security.User><font color="#B6BDBF">Witaj, </font><t:pagelink page="showUser">${username}</t:pagelink>&nbsp;&nbsp;&nbsp;&nbsp;<t:pagelink page="logout" class="btn btn-default navbar-btn">Wyloguj</t:pagelink></t:security.User>
-           			<t:security.Guest><font color="#B6BDBF">Witaj, gościu! </font><t:pagelink page="signin" class="btn btn-default navbar-btn">Zaloguj</t:pagelink></t:security.Guest>
 
             </span>
 
@@ -60,7 +59,7 @@
     <hr />
 
     <footer>
-        <p>&copy; Copyright by <a href="http://www.simpleclever.pl">Simple And Clever 2016</a></p>
+        <p>&copy; Copyright by <a href="http://www.simpleclever.pl">Simple &amp; Clever 2016</a></p>
     </footer>
 
 </div> <!-- /container -->

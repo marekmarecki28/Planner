@@ -125,9 +125,9 @@ public class HotelSchedule {
 		return this.year;
 	}
 	
-	void onDelete(Long calendarId,Long employeeId) {
+	void onDelete(Long calendarId,Long employeeId, Long userCalendarId) {
         try {
-            userCalendarDAO.deleteUserCalendarEmployee(calendarId,employeeId);
+            userCalendarDAO.deleteUserCalendarEmployee(calendarId,employeeId,userCalendarId);
         }
         catch (Exception e) {
             errorMessage = e.getMessage();

@@ -6,11 +6,10 @@
     
     <div class="eg">
         <t:if test="userCalendar">
-            <t:beaneditform t:id="calendarForm" object="userCalendar" t:include="userId,description,workStart,workEnd" t:reorder="userId,workStart,workEnd,description" submitLabel="Save">
+            <t:beaneditform t:id="calendarForm" object="userCalendar" t:include="userId,description,workStart,workEnd" t:reorder="userId,workStart,workEnd,description" submitLabel="Zapisz">
             	<p:userId>
             		<t:label for="employeeMenu"/>
             		<t:select t:id="employeeMenu" value="employee" model="personsModel" t:encoder="employeeEncoder"/>
-    				<br/>
             	</p:userId>
             	<p:workStart>
 	            	<br/>

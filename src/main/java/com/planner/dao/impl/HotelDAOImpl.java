@@ -8,7 +8,9 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
 import com.planner.dao.HotelDAO;
+import com.planner.entities.Employee;
 import com.planner.entities.Hotel;
+import com.planner.entities.UserCalendar;
 
 public class HotelDAOImpl implements HotelDAO{
 	
@@ -42,6 +44,38 @@ public class HotelDAOImpl implements HotelDAO{
 		try{
 	         tx = session.getTransaction();
 			 session.save(hotel); 
+	         tx.commit();
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         System.out.println("ERRRORORRO!!!");
+	         e.printStackTrace(); 
+	      }
+	}
+
+	@Override
+	public void deleteHotel(Long id) {
+		Transaction tx = null;
+		try{
+	         tx = session.getTransaction();
+			 Hotel hotel = (Hotel) session.load(Hotel.class,id);
+			 session.delete(hotel);
+			 
+			 List<Employee> employees = session.createQuery("from Employee where hotel_id = " + id).list();
+			 
+			 for (Employee employee : employees)
+			 {
+				 session.load(Employee.class, employee.getEmployeeId());
+				 session.delete(employee);
+				 
+				 List<UserCalendar> userCalendars = session.createQuery("from UserCalendar where user_id = " + employee.getEmployeeId()).list();
+				 
+				 for (UserCalendar userCalendar : userCalendars)
+				 {
+					 session.load(UserCalendar.class, userCalendar.getUserCalendarId());
+					 session.delete(userCalendar);
+				 }
+			 }
+			 
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

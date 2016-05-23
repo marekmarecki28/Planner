@@ -6,7 +6,7 @@
     
     <div class="eg">
         <t:if test="userCalendar">
-            <t:beaneditform t:id="calendarForm" object="userCalendar" t:include="description,workStart,workEnd" t:reorder="workStart,workEnd,description" submitLabel="Save">
+            <t:beaneditform t:id="calendarForm" object="userCalendar" t:include="description,workStart,workEnd" t:reorder="workStart,workEnd,description" submitLabel="Zapisz">
             	<p:workStart>
 	            	<br/>
 					<t:label for="crtWorkStart"/>
@@ -39,7 +39,7 @@
 				<input t:type="submit" t:value="Zapisz"/>
             </t:form>
         </t:if>
-        <a t:type="pageLink" t:page="plan" href="#">Cancel</a>
+        <a t:type="pageLink" t:page="hotelschedule" href="#">Cancel</a>
     </div>
 
 </html>

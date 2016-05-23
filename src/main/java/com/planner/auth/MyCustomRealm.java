@@ -1,5 +1,10 @@
 package com.planner.auth;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -63,4 +68,5 @@ public class MyCustomRealm extends JdbcRealm{
 		}
 
 	}
+
 }

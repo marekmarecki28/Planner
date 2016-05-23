@@ -91,7 +91,6 @@
 		<label class="checkbox">
 			<t:checkbox t:id="rememberMe" tabindex="3" />${message:remember.me}
 		</label>
-		<p><t:pagelink page="newAccount">${message:click.here}</t:pagelink></p>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">${message:login}</button>
 		<t:pagelink page="index" class="btn btn-lg btn-primary btn-block">${message:back}</t:pagelink>
 	</t:form>

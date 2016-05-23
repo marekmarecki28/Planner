@@ -13,7 +13,7 @@
 	<br/>
 	
 	<t:If t:test="submitted">
-		<t:BeanDisplay t:object="employee" t:exclude="hotelId,positionId,fullName"/>
+		<t:BeanDisplay t:object="employee" t:exclude="hotelId,positionId,fullName,sex"/>
 		<div class="well dl-horizontal">
 		<b>${userWorkHoursWeekly}</b>
 		</div>
