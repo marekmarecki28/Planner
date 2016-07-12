@@ -1,6 +1,7 @@
 package com.planner.pages;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,7 @@ import com.planner.entities.UserCalendarDescr;
 
 public class Plan {
 	
+	private final String format = "dd MMMM yyyy";
 	private int hourDiff;
 	private int minuteDiff;
 	
@@ -272,5 +274,10 @@ public class Plan {
             errorMessage = e.getMessage();
         }
     }
+	
+	public Format getFormat()
+	{
+	    return new SimpleDateFormat(format);
+	}
 	
 }

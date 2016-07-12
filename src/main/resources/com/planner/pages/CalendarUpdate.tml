@@ -39,7 +39,7 @@
 				<input t:type="submit" t:value="Zapisz"/>
             </t:form>
         </t:if>
-        <a t:type="pageLink" t:page="hotelschedule" href="#">Cancel</a>
+        <a t:type="pageLink" t:page="plan" t:context="hotelId" href="#">${message:cancel}</a>
     </div>
 
 </html>

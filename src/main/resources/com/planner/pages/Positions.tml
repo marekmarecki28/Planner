@@ -13,6 +13,9 @@
                     t:mixins="Confirm" t:message="Delete ${employee.firstName} ${employee.lastName}?">
 				<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
 		</p:deleteCell>
+		<p:empty>
+              <p>${message:empty}</p>
+        </p:empty>
 	</table>
 	
 	<h4>Lobby:</h4>
@@ -26,6 +29,9 @@
                     t:mixins="Confirm" t:message="Delete ${employee.firstName} ${employee.lastName}?">
 				<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
 		</p:deleteCell>
+		<p:empty>
+              <p>${message:empty}</p>
+        </p:empty>
 	</table>
 	
 	<h4>Spa:</h4>
@@ -39,6 +45,9 @@
                     t:mixins="Confirm" t:message="Delete ${employee.firstName} ${employee.lastName}?">
 				<img src="${asset:context:assets/delete.png}" alt="Delete"/></a>
 		</p:deleteCell>
+		<p:empty>
+              <p>${message:empty}</p>
+        </p:empty>
 	</table>
 	
 	<br/>

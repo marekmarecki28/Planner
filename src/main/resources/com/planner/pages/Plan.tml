@@ -22,6 +22,9 @@
 			<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 				<br/>
 			<table t:type="grid" t:source="calendarsWeek" t:row="employeeCalendar" t:include="workDate,day" t:add="activities,add">
+				<p:workDateCell>
+					<t:output format="format" value="employeeCalendar.workDate"/>
+				</p:workDateCell>
 				<p:activitiesCell>
 				<table t:type="grid" t:source="employeeCalendar.listUserCalendarDescr" t:row="userCalendarDescr" t:include="workStart,workEnd,description"
 				 t:add="action,delete" empty="">
