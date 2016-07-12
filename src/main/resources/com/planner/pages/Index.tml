@@ -93,12 +93,13 @@
 		<t:alerts/>
 		<t:errors/>
 
-		<h2 class="form-signin-heading">Zaloguj się</h2>
+		<h2 class="form-signin-heading">${message:signin}</h2>
 		<t:textfield t:id="username" validate="required" tabindex="1" placeholder="${message:username}" required="true" autofocus="true"/>
 		<t:passwordfield t:id="password" validate="required" tabindex="2" placeholder="${message:password}" required="true"/>
 		<label class="checkbox">
 			<t:checkbox t:id="rememberMe" tabindex="3" />${message:remember.me}
 		</label>
+<!-- 		<p><t:pagelink page="newAccount">${message:click.here}</t:pagelink></p> -->
 		<button class="btn btn-lg btn-primary btn-block" type="submit">${message:login}</button>
 		<t:pagelink page="index" class="btn btn-lg btn-primary btn-block">${message:back}</t:pagelink>
 	</t:form>

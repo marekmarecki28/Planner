@@ -27,7 +27,7 @@ public class Employee implements Serializable{
 	public Employee(){
 	}
 	
-	public Employee(Long employeeId, String firstName, String lastName, Long age, Sex sex, String email,
+	public Employee(Long employeeId, String firstName, String lastName, String age, Sex sex, String email,
 			String description, String fullName, Long hotelId, Long positionId) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
@@ -49,7 +49,7 @@ public class Employee implements Serializable{
 	
 	private String firstName;
 	private String lastName;
-	private Long age;
+	private String age;
 	
 	@Enumerated(EnumType.STRING)
 	private Sex sex;
@@ -83,10 +83,10 @@ public class Employee implements Serializable{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Long getAge() {
+	public String getAge() {
 		return age;
 	}
-	public void setAge(Long age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 	public Sex getSex() {
