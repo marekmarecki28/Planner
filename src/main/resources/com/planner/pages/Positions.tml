@@ -52,4 +52,12 @@
 	
 	<br/>
 	<a t:type="pagelink" t:page="createEmployee" t:context="hotel.hotelId" href="#"><button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj nowego pracownika</button></a>
+	<br/>
+	
+	<t:Form>
+    	<t:select t:id="positionsMenu" value="position" model="positionsModel" t:encoder="positionEncoder"/>
+    	<br/>
+    	<input class="btn btn-lg btn-primary btn-block" t:id="submit" t:type="Submit" value="Wybierz"/>
+	</t:Form>
+	
 </html>

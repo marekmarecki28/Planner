@@ -4,15 +4,20 @@ import java.util.List;
 
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.PersistenceConstants;
+import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.SelectModelFactory;
 
 import com.planner.dao.EmployeeDAO;
 import com.planner.dao.HotelDAO;
+import com.planner.dao.PositionsDAO;
+import com.planner.encoders.PositionEncoder;
 import com.planner.entities.Employee;
 import com.planner.entities.Hotel;
+import com.planner.entities.Position;
 
 public class Positions {
 	
@@ -28,6 +33,19 @@ public class Positions {
 	@Property
 	@Persist
 	private Hotel hotel;
+	
+	@Property
+	@Persist
+	private Position position;
+	
+	@Inject
+	private PositionsDAO positionsDAO;
+	
+	@Property
+    private SelectModel positionsModel;
+	
+	@Inject
+    private SelectModelFactory selectModelFactory;
 	
 	@Inject
 	private HotelDAO hotelDAO;
@@ -50,6 +68,11 @@ public class Positions {
 
     	}
 	}	
+	
+	 void onPrepareForRender() {
+	 	List<Position> positions = positionsDAO.getPositions();
+        positionsModel = selectModelFactory.create(positions, "description");
+    }
 
 	public List<Employee> getPokojowa()
 	{
@@ -76,5 +99,9 @@ public class Positions {
         }
     }
 	
+    public PositionEncoder getPositionEncoder()
+	{
+		return new PositionEncoder(positionsDAO);
+	}
 	
 }

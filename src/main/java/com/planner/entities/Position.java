@@ -15,9 +15,10 @@ public class Position {
 	
 	public Position(){}
 	
-	public Position(Long positionId, String description) {
+	public Position(Long positionId, String description, Long hotelId) {
 		this.positionId = positionId;
 		this.description = description;
+		this.hotelId = hotelId;
 	}
 	
 	@Id
@@ -25,6 +26,8 @@ public class Position {
 	@NonVisual
 	@Column(name = "POSITION_ID")
 	private Long positionId;
+	@Column(name = "HOTEL_ID")
+	private Long hotelId;
 	private String description;
 	
 	public Long getPositionId() {
@@ -32,6 +35,12 @@ public class Position {
 	}
 	public void setPositionId(Long positionId) {
 		this.positionId = positionId;
+	}
+	public Long getHotelId() {
+		return hotelId;
+	}
+	public void setHotelId(Long hotelId) {
+		this.hotelId = hotelId;
 	}
 	public String getDescription() {
 		return description;
