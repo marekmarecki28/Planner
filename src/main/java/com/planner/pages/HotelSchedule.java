@@ -1,6 +1,7 @@
 package com.planner.pages;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,8 @@ import com.planner.entities.HotelCalendar;
 import com.planner.entities.UserCalendarDescr;
 
 public class HotelSchedule {
+	
+	private final String format = "dd MMMM yyyy";
 
 	@Persist
 	private Integer week;
@@ -133,5 +136,10 @@ public class HotelSchedule {
             errorMessage = e.getMessage();
         }
     }
+	
+	public Format getFormat()
+	{
+	    return new SimpleDateFormat(format);
+	}
 
 }

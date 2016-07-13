@@ -7,6 +7,9 @@
 		<input class="btn btn-lg btn-primary btn-block" t:id="up" t:type="Submit" value="Poprzedni tydzień"/>
 		<br/>
 		<table t:type="grid" t:source="hotelCalendars" t:row="hotelCalendar" t:exclude="calendarId" t:add="users,add">
+			<p:workDateCell>
+					<t:output format="format" value="hotelCalendar.workDate"/>
+			</p:workDateCell>
 			<p:usersCell>
                <t:grid t:source="hotelCalendar.listUserCalendarDescr" t:row="userCalendarDescr" t:reorder="fullName,workStart,workEnd,description" 
                t:exclude="calendarId,employeeId,userCalendarId" t:add="update,delete" empty="">
