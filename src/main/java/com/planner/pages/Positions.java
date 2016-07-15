@@ -16,6 +16,7 @@ import com.planner.dao.HotelDAO;
 import com.planner.dao.PositionsDAO;
 import com.planner.encoders.PositionEncoder;
 import com.planner.entities.Employee;
+import com.planner.entities.EmployeePositions;
 import com.planner.entities.Hotel;
 import com.planner.entities.Position;
 
@@ -23,6 +24,9 @@ public class Positions {
 	
 	@InjectPage
 	private CreateEmployee createEmployee;
+	
+	@InjectPage
+	private CreatePosition createPosition;
 	
 	@Inject
 	private EmployeeDAO employeeDAO;
@@ -44,6 +48,9 @@ public class Positions {
 	@Property
     private SelectModel positionsModel;
 	
+	@Property
+	private EmployeePositions employeePositions;
+	
 	@Inject
     private SelectModelFactory selectModelFactory;
 	
@@ -53,6 +60,9 @@ public class Positions {
 	@Property
     @Persist(PersistenceConstants.FLASH)
     private String errorMessage;
+	
+	@Persist
+	private boolean isSubmitted;
 	
 	void onActivate(EventContext context)
 	{
@@ -70,24 +80,24 @@ public class Positions {
 	}	
 	
 	 void onPrepareForRender() {
-	 	List<Position> positions = positionsDAO.getPositions();
+	 	List<Position> positions = positionsDAO.getPositions(hotel.getHotelId());
         positionsModel = selectModelFactory.create(positions, "description");
     }
 
-	public List<Employee> getPokojowa()
-	{
-		return employeeDAO.getPokojowa(hotel.getHotelId());
-	}
-	
-	public List<Employee> getLobby()
-	{
-		return employeeDAO.getLobby(hotel.getHotelId());
-	}
-	
-	public List<Employee> getSpa()
-	{
-		return employeeDAO.getSpa(hotel.getHotelId());
-	}
+//	public List<Employee> getPokojowa()
+//	{
+//		return employeeDAO.getPokojowa(hotel.getHotelId());
+//	}
+//	
+//	public List<Employee> getLobby()
+//	{
+//		return employeeDAO.getLobby(hotel.getHotelId());
+//	}
+//	
+//	public List<Employee> getSpa()
+//	{
+//		return employeeDAO.getSpa(hotel.getHotelId());
+//	}
 
     void onDelete(Long id) {
 
@@ -102,6 +112,28 @@ public class Positions {
     public PositionEncoder getPositionEncoder()
 	{
 		return new PositionEncoder(positionsDAO);
+	}
+    
+    void onSelectedFromSubmit()
+	{
+		this.isSubmitted = true;
+	}
+    
+	public boolean isSubmitted() 
+	{
+		if(position != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public List<EmployeePositions> getEmployeePositionsList()
+	{
+		return employeeDAO.getEmployeePositions(position.getPositionId(), hotel.getHotelId());
 	}
 	
 }

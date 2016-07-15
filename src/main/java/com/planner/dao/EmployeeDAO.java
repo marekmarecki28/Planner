@@ -3,6 +3,7 @@ package com.planner.dao;
 import java.util.List;
 
 import com.planner.entities.Employee;
+import com.planner.entities.EmployeePositions;
 
 public interface EmployeeDAO {
 	public List<String> getEmployeeNames();
@@ -14,4 +15,5 @@ public interface EmployeeDAO {
 	public void createEmployee(Employee employee);
 	public void updateEmployee(Employee employee);
 	public void deleteEmployee(Long id);
+	public List<EmployeePositions> getEmployeePositions(Long positionId, Long hotelId);
 }

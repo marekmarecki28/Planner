@@ -6,7 +6,8 @@ import com.planner.entities.Position;
 
 public interface PositionsDAO {
 
-	List<Position> getPositions();
+	List<Position> getPositions(Long hotelId);
 	Position getPosition(Long positionId);
+	public void createPosition(Position position);
 
 }

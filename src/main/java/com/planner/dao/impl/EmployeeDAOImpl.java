@@ -1,5 +1,6 @@
 package com.planner.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -9,6 +10,8 @@ import org.hibernate.criterion.Projections;
 
 import com.planner.dao.EmployeeDAO;
 import com.planner.entities.Employee;
+import com.planner.entities.EmployeePositions;
+import com.planner.entities.Position;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 
@@ -89,6 +92,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	         System.out.println("ERRRORORRO!!!");
 	         e.printStackTrace(); 
 	      }
+	}
+	
+	public List<EmployeePositions> getEmployeePositions(Long positionId, Long hotelId)
+	{
+		List<EmployeePositions> listEmployeesPositions = new ArrayList<EmployeePositions>();
+		List<Employee> employees = session.createQuery("from Employee where position_id = " + positionId + " and hotel_id = " + hotelId).list();
+		
+		for(Employee employee :employees)
+		{
+			Position position = (Position) session.createQuery("from Position where position_id = " + positionId).uniqueResult();
+			EmployeePositions employeePositions = new EmployeePositions(employee.getEmployeeId(),employee.getFirstName(),employee.getLastName(),employee.getDescription(),position.getDescription());
+			listEmployeesPositions.add(employeePositions);
+		}
+		return listEmployeesPositions;
 	}
 
 }
