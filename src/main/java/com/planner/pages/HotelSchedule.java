@@ -5,6 +5,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.PersistenceConstants;
@@ -139,7 +140,8 @@ public class HotelSchedule {
 	
 	public Format getFormat()
 	{
-	    return new SimpleDateFormat(format);
+		Locale locale = new Locale("PL");
+	    return new SimpleDateFormat(format,locale);
 	}
 
 }
