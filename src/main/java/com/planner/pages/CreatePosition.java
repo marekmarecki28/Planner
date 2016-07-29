@@ -11,53 +11,32 @@ import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
 
-import com.planner.dao.EmployeeDAO;
 import com.planner.dao.HotelDAO;
 import com.planner.dao.PositionsDAO;
 import com.planner.encoders.PositionEncoder;
-import com.planner.entities.Employee;
 import com.planner.entities.Hotel;
 import com.planner.entities.Position;
 import com.planner.enums.Sex;
 
-public class CreateEmployee {
+public class CreatePosition {
 	
 	@InjectComponent
-    private BeanEditForm createEmployeeForm;
+    private BeanEditForm createPositionForm;
 	
 	@Property
-	private Employee employee;
+	private Position position;
 	
 	@Property
 	@Persist
 	private Hotel hotel;
 	
-	@Property
-	Sex sex;
-	
-	@Property
-	private Position position;
+	@Inject
+	private PositionsDAO positionsDAO;
 	
 	@Inject
 	private HotelDAO hotelDAO;
 	
-	@Inject
-	private EmployeeDAO employeeDAO;
-	
-	@Inject
-	private PositionsDAO positionsDAO;
-	
-	@Property
-    private SelectModel positionsModel;
-	
-	@Inject
-    private SelectModelFactory selectModelFactory;
-	
-	public PositionEncoder getPositionEncoder()
-	{
-		return new PositionEncoder(positionsDAO);
-	}
-	
+
 	void onActivate(EventContext context)
 	{
 		
@@ -74,26 +53,24 @@ public class CreateEmployee {
     	}
 	}
 	
-	void onPrepareFromCreateEmployeeForm() throws Exception {
-        employee = new Employee();
+	void onPrepareFromCreatePositionForm() throws Exception {
+        position = new Position();
     }
 	
-	 void onValidateFromCreateEmployeeForm() 
+	 void onValidateFromCreatepositionForm() 
 	 {
-        if (createEmployeeForm.getHasErrors()) {
+        if (createPositionForm.getHasErrors()) {
             // We get here only if a server-side validator detected an error.
             return;
         }
 
         try {
-        	employee.setHotelId(hotel.getHotelId());
-        	employee.setPositionId(position.getPositionId());
-        	employee.setSex(sex);
-            employeeDAO.createEmployee(employee);
+        	position.setHotelId(hotel.getHotelId());
+            positionsDAO.createPosition(position);
         } catch (Exception e) {
             // Display the cause. In a real system we would try harder to get a
             // user-friendly message.
-        	createEmployeeForm.recordError(e.getMessage());
+        	createPositionForm.recordError(e.getMessage());
         }
      }
 	 
@@ -101,10 +78,5 @@ public class CreateEmployee {
     {
     	return Positions.class;
     }
-	 
-	 void onPrepareForRender() {
-		 	List<Position> positions = positionsDAO.getPositions(hotel.getHotelId());
-	        positionsModel = selectModelFactory.create(positions, "description");
-	    }
 
 }

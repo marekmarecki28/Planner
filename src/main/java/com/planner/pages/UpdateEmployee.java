@@ -75,7 +75,7 @@ public class UpdateEmployee {
     }
 	
 	void onPrepareForRender() {
-	 	List<Position> positions = positionsDAO.getPositions();
+	 	List<Position> positions = positionsDAO.getPositions(employee.getHotelId());
         positionsModel = selectModelFactory.create(positions, "description");
     }
 	

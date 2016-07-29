@@ -1,0 +1,11 @@
+<html t:type="layout" title="Plan"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<h1>Tworzenie nowego stanowiska.</h1>
+
+	<div class="eg">
+           <t:beaneditform t:id="createPositionForm" object="position" t:exclude="positionId,hotelId" submitLabel="Zapisz"/>
+    </div>
+
+</html>
